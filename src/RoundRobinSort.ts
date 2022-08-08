@@ -1,10 +1,8 @@
-import type RoundRobinTeam from './RoundRobinTeam';
-import Team from './Team';
-import type { SortableAttribute, TieBreak } from './types';
+import type { RoundRobinTeamProtocol, SortableAttribute, SortProtocol, TieBreak } from "./types";
 
-export default class RoundRobinSort {
+export default class RoundRobinSort implements SortProtocol {
   private tieBreaks: TieBreak[];
-  public sortAttribute: keyof RoundRobinTeam = 'position';
+  public sortAttribute: SortableAttribute = "position";
 
   constructor(tieBreaks: TieBreak[]) {
     this.tieBreaks = tieBreaks;
@@ -14,8 +12,8 @@ export default class RoundRobinSort {
     if (attribute) this.sortAttribute = attribute;
     const direction = sentDirection || 1;
 
-    return (team1: RoundRobinTeam, team2: RoundRobinTeam) => {
-      if (attribute !== 'position') {
+    return (team1: RoundRobinTeamProtocol, team2: RoundRobinTeamProtocol) => {
+      if (attribute !== "position") {
         if (team1[this.sortAttribute] < team2[this.sortAttribute]) return 1 * direction;
         if (team1[this.sortAttribute] > team2[this.sortAttribute]) return -1 * direction;
       }
@@ -26,31 +24,18 @@ export default class RoundRobinSort {
     };
   };
 
-  public positionSort = (team1: RoundRobinTeam, team2: RoundRobinTeam) => {
-    if (team1.points < team2.points) return 1; // 1 changes the position
+  public positionSort = (team1: RoundRobinTeamProtocol, team2: RoundRobinTeamProtocol) => {
     if (team1.points > team2.points) return -1; // -1 still the same
+    if (team1.points < team2.points) return 1; // 1 changes the position
 
-    // ? não sei se isto está bem feito.
-    for (let i = 0; i < this.tieBreaks.length; i++) {
-      const tieBreaker = this.tieBreaks[i];
-
-      switch (tieBreaker) {
-        case 'head-to-head': {
-          const [team1Goals, team2Goals] = Team.headToHeadGoals(team1, team2);
-          if (team1Goals > team2Goals) return -1;
-          if (team1Goals < team2Goals) return 1;
-          break;
-        }
-
-        default: {
-          if (team1[tieBreaker] > team2[tieBreaker]) return -1;
-          if (team1[tieBreaker] < team2[tieBreaker]) return 1;
-        }
-      }
+    for (const tieBreaker of this.tieBreaks) {
+      const [team1attribute, team2attribute] = tieBreaker.getAttributes(team1, team2);
+      if (team1attribute < team2attribute) return 1;
+      if (team1attribute > team2attribute) return -1;
     }
 
-    if (team1.name < team2.name) return -1;
     if (team1.name > team2.name) return 1;
+    if (team1.name < team2.name) return -1;
     return 0;
   };
 }

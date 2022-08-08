@@ -1,8 +1,7 @@
-import type Match from './Match';
-import Team from './Team';
-import type { Result } from './types';
+import Team from "./Team";
+import { MatchProtocol, Result, RoundRobinTeamProtocol } from "./types";
 
-export default class RoundRobinTeam extends Team {
+class RoundRobinTeam extends Team implements RoundRobinTeamProtocol {
   public wins = 0;
   public draws = 0;
   public losses = 0;
@@ -23,22 +22,17 @@ export default class RoundRobinTeam extends Team {
     return (this.points * 100) / (this.matchesPlayed * 3);
   }
 
-  get matchesPlayed(): number {
-    return this.matches.length;
-  }
-
-  get lastMatches(): Match[] {
+  get lastMatches(): MatchProtocol[] {
     return this.matches.slice(-5);
   }
 
   get lastResults(): Result[] {
     return this.lastMatches.map((match) => {
-      const { score } = match;
-      const [selfScore, otherScore] = score.getTeamScore(this);
+      const [selfScore, otherScore] = match.getTeamScore(this);
 
-      if (selfScore > otherScore) return 'win';
-      if (otherScore > selfScore) return 'lose';
-      return 'draw';
+      if (selfScore > otherScore) return "win";
+      if (otherScore > selfScore) return "lose";
+      return "draw";
     });
   }
 
@@ -50,7 +44,7 @@ export default class RoundRobinTeam extends Team {
     this._position = position;
   }
 
-  playMatch(match: Match): void {
+  playMatch(match: MatchProtocol): void {
     if (match.score.homeTeam === null || match.score.awayTeam === null) {
       delete this.matchesPlayedObject[match.id];
     } else {
@@ -62,14 +56,13 @@ export default class RoundRobinTeam extends Team {
 
   private calculatePoints(): void {
     this.resetValues();
-    this.matches.forEach((match: Match) => {
+    this.matchesPlayedArray.forEach((match: MatchProtocol) => {
       this.calculateMatch(match);
     });
   }
 
-  private calculateMatch(match: Match): void {
-    const { score } = match;
-    const [selfScore, otherScore] = score.getTeamScore(this);
+  private calculateMatch(match: MatchProtocol): void {
+    const [selfScore, otherScore] = match.getTeamScore(this);
 
     this.goals += selfScore;
     this.counterGoals += otherScore;
@@ -91,3 +84,5 @@ export default class RoundRobinTeam extends Team {
     this.losses = 0;
   }
 }
+
+export default RoundRobinTeam;

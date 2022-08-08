@@ -1,10 +1,12 @@
 {
-  "name": "base",
+  "name": "soccer-tournament",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "files": ["/dist"],
+  "files": [
+    "/dist"
+  ],
   "repository": "https://github.com/EnrickyHip/",
   "homepage": "https://github.com/EnrickyHip/",
   "scripts": {
@@ -22,5 +24,8 @@
     "prettier": "^2.7.1",
     "ts-node": "^10.8.2",
     "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "roundrobin-tournament-js": "^1.1.1"
   }
 }

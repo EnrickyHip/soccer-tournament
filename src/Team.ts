@@ -1,10 +1,10 @@
-import type Match from './Match';
-import type { MatchesObject } from './types';
+import type { MatchesObject, MatchProtocol } from "./types";
 
-export default abstract class Team {
+abstract class Team {
   public readonly id: number;
   public readonly name: string;
   public readonly shield: string;
+  protected readonly matchesObject: MatchesObject = {};
   protected readonly matchesPlayedObject: MatchesObject = {};
 
   constructor(name: string, shield: string, id: number) {
@@ -13,31 +13,30 @@ export default abstract class Team {
     this.id = id;
   }
 
-  get matches(): Match[] {
+  get matches(): MatchProtocol[] {
+    return Object.values(this.matchesObject);
+  }
+
+  get matchesPlayedArray(): MatchProtocol[] {
     return Object.values(this.matchesPlayedObject);
   }
 
-  public goalsInMatches(matches: Match[]): number {
+  get matchesPlayed(): number {
+    return this.matchesPlayedArray.length;
+  }
+
+  public goalsInMatches(matches: MatchProtocol[]): number {
     return matches.reduce((goals: number, match) => {
-      const { score } = match;
-      const [selfScore] = score.getTeamScore(this);
+      const [selfScore] = match.getTeamScore(this);
       return goals + selfScore;
     }, 0);
   }
 
-  static getMatchesBetween(team1: Team, team2: Team): Match[] {
-    return team1.matches.filter((match: Match) => {
-      const { homeTeam, awayTeam } = match;
-      return (homeTeam === team1 && awayTeam === team2) || (homeTeam === team2 && awayTeam === team1);
-    });
+  public addMatch(match: MatchProtocol) {
+    this.matchesObject[match.id] = match;
   }
 
-  static headToHeadGoals(team1: Team, team2: Team): number[] {
-    const matches = Team.getMatchesBetween(team1, team2);
-    const team1Goals = team1.goalsInMatches(matches);
-    const team2Goals = team2.goalsInMatches(matches);
-    return [team1Goals, team2Goals];
-  }
-
-  abstract playMatch(match: Match): void;
+  abstract playMatch(match: MatchProtocol): void;
 }
+
+export default Team;

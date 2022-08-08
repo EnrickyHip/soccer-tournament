@@ -1,25 +1,27 @@
-import type { ClassificationInterface } from './types';
+import type { ClassificationOptions, ClassificationProtocol, RoundRobinTeamProtocol } from "./types";
 
-export default class Classification {
-  private readonly classification: ClassificationInterface;
+class Classification implements ClassificationProtocol {
+  private readonly classification: ClassificationOptions;
 
-  constructor(classification: ClassificationInterface) {
+  constructor(classification: ClassificationOptions) {
     this.classification = classification;
   }
 
-  isClassified(position: number, classification: keyof ClassificationInterface) {
-    const classified = this.classification[classification];
-    if (!classified) return false;
-    return position >= classified.min && position <= classified.max;
+  get(team: RoundRobinTeamProtocol) {
+    const { position } = team;
+    if (position === 1) return "first";
+
+    for (const key in this.classification) {
+      if (this.isClassified(position, key)) return key;
+    }
+
+    return null;
   }
 
-  get(position: number) {
-    if (position === 1) return 'first';
-    if (this.isClassified(position, 'classified1')) return 'classified1';
-    if (this.isClassified(position, 'classified2')) return 'classified2';
-    if (this.isClassified(position, 'classified3')) return 'classified3';
-    if (this.isClassified(position, 'playoff')) return 'playoff';
-    if (this.isClassified(position, 'relegated')) return 'relegated';
-    return '';
+  private isClassified(position: number, classification: keyof ClassificationOptions) {
+    const classified = this.classification[classification];
+    return position >= classified.min && position <= classified.max;
   }
 }
+
+export default Classification;

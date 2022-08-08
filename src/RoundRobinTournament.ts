@@ -1,27 +1,35 @@
-import roundrobin, { type Rounds } from 'roundrobin-tournament-js';
-import Tournament from './Tournament';
-import Match from './Match';
-import type RoundRobinTeam from './RoundRobinTeam';
+import roundrobin, { type Rounds } from "roundrobin-tournament-js";
+import Match from "./Match";
 import type {
-  ClassificationInterface, Round, SortableAttribute, TieBreak,
-} from './types';
-import Classification from './Classification';
-import RoundRobinSort from './RoundRobinSort';
+  ClassificationOptions,
+  ClassificationProtocol,
+  MatchProtocol,
+  Round,
+  RoundRobinTeamProtocol,
+  SortableAttribute,
+  SortProtocol,
+  TieBreak,
+  Tournament,
+} from "./types";
+import Classification from "./Classification";
+import RoundRobinSort from "./RoundRobinSort";
 
-export default class RoundRobinTournament extends Tournament {
-  public readonly teams: RoundRobinTeam[];
+class RoundRobinTournament implements Tournament {
+  public readonly teams: RoundRobinTeamProtocol[];
+  public readonly matches: MatchProtocol[] = [];
   public readonly rounds: Round[];
-  public readonly classification: Classification;
-  private readonly sort: RoundRobinSort;
+  public readonly classification: ClassificationProtocol;
+  private readonly secondRound: boolean;
+  private readonly sort: SortProtocol;
 
   constructor(
-    teams: RoundRobinTeam[],
+    teams: RoundRobinTeamProtocol[],
     secondRound: boolean,
-    classification: ClassificationInterface,
+    classification: ClassificationOptions,
     tieBreaks: TieBreak[],
   ) {
-    super(teams, secondRound);
     this.teams = teams;
+    this.secondRound = secondRound;
     this.classification = new Classification(classification);
     this.sort = new RoundRobinSort(tieBreaks);
     this.rounds = this.createRounds();
@@ -33,9 +41,9 @@ export default class RoundRobinTournament extends Tournament {
     return this.createMatches(rounds);
   }
 
-  private createMatches(rounds: Rounds<RoundRobinTeam>): Round[] {
-    return rounds.map((round: RoundRobinTeam[][]) => {
-      return round.map((teams: RoundRobinTeam[]) => {
+  private createMatches(rounds: Rounds<RoundRobinTeamProtocol>): Round[] {
+    return rounds.map((round: RoundRobinTeamProtocol[][]) => {
+      return round.map((teams: RoundRobinTeamProtocol[]) => {
         const id = this.matches.length;
         const newMatch = Match.create(teams, id);
         this.matches.push(newMatch);
@@ -44,14 +52,17 @@ export default class RoundRobinTournament extends Tournament {
     });
   }
 
+  //* seria interessante se toda vez que uma partida fosse jogada esse método automaticamente fosse executado.
   public sortTeams(attribute?: SortableAttribute, direction?: 1 | -1): void {
     this.teams.sort(this.sort.positionSort);
     this.teams.forEach((team, index) => {
       team.setPosition(index + 1);
     });
 
-    if (attribute !== undefined || this.sort.sortAttribute !== 'position') {
+    if (attribute !== undefined || this.sort.sortAttribute !== "position") {
       this.teams.sort(this.sort.customSort(attribute, direction));
     }
   }
 }
+
+export default RoundRobinTournament;
