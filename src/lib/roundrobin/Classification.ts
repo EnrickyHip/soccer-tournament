@@ -1,4 +1,5 @@
-import type { ClassificationOptions, ClassificationProtocol, RoundRobinTeamProtocol } from "./types";
+import { ClassificationOptions, ClassificationProtocol } from "../types/interfaces";
+import { RoundRobinTeam } from "./RoundRobinTeam";
 
 class Classification implements ClassificationProtocol {
   private readonly classification: ClassificationOptions;
@@ -7,7 +8,7 @@ class Classification implements ClassificationProtocol {
     this.classification = classification;
   }
 
-  get(team: RoundRobinTeamProtocol) {
+  get(team: RoundRobinTeam): string | null {
     const { position } = team;
     if (position === 1) return "first";
 

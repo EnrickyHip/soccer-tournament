@@ -1,4 +1,5 @@
-import type { RoundRobinTeamProtocol, SortableAttribute, SortProtocol, TieBreak } from "./types";
+import { SortableAttribute } from "../types";
+import { RoundRobinTeamProtocol, SortProtocol, TieBreak } from "../types/interfaces";
 
 export default class RoundRobinSort implements SortProtocol {
   private tieBreaks: TieBreak[];

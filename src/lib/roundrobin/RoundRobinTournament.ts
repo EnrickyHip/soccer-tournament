@@ -1,21 +1,21 @@
 import roundrobin, { type Rounds } from "roundrobin-tournament-js";
-import Match from "./Match";
-import type {
+import { Match } from "../Match";
+import { Round, SortableAttribute, Tournament } from "../types";
+import {
   ClassificationOptions,
   ClassificationProtocol,
   MatchProtocol,
-  Round,
   RoundRobinTeamProtocol,
-  SortableAttribute,
   SortProtocol,
   TieBreak,
-  Tournament,
-} from "./types";
+} from "../types/interfaces";
+
 import Classification from "./Classification";
 import RoundRobinSort from "./RoundRobinSort";
+import { RoundRobinTeam } from "./RoundRobinTeam";
 
-class RoundRobinTournament implements Tournament {
-  public readonly teams: RoundRobinTeamProtocol[];
+export class RoundRobinTournament implements Tournament {
+  public readonly teams: RoundRobinTeam[];
   public readonly matches: MatchProtocol[] = [];
   public readonly rounds: Round[];
   public readonly classification: ClassificationProtocol;
@@ -23,7 +23,7 @@ class RoundRobinTournament implements Tournament {
   private readonly sort: SortProtocol;
 
   constructor(
-    teams: RoundRobinTeamProtocol[],
+    teams: RoundRobinTeam[],
     secondRound: boolean,
     classification: ClassificationOptions,
     tieBreaks: TieBreak[],
@@ -64,5 +64,3 @@ class RoundRobinTournament implements Tournament {
     }
   }
 }
-
-export default RoundRobinTournament;

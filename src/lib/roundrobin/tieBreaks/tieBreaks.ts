@@ -1,5 +1,6 @@
-import Match from "./Match";
-import { RoundRobinTeamProtocol, SortableAttribute, TieBreak } from "./types";
+import { Match } from "../../Match";
+import { SortableAttribute } from "../../types";
+import { RoundRobinTeamProtocol, TieBreak } from "../../types/interfaces";
 
 class AttributeTieBreak implements TieBreak {
   private attribute: SortableAttribute;
@@ -19,7 +20,9 @@ class HeadToHeadTieBreak implements TieBreak {
   };
 }
 
-export const wins = new AttributeTieBreak("wins");
-export const goals = new AttributeTieBreak("goals");
-export const goalDifference = new AttributeTieBreak("goalDifference");
-export const headToHead = new HeadToHeadTieBreak();
+const wins = new AttributeTieBreak("wins");
+const goals = new AttributeTieBreak("goals");
+const goalDifference = new AttributeTieBreak("goalDifference");
+const headToHead = new HeadToHeadTieBreak();
+
+export const tieBreaks = { wins, goals, goalDifference, headToHead };

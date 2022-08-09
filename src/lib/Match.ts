@@ -1,7 +1,8 @@
 import type Team from "./Team";
-import type { Goal, MatchProtocol, Score } from "./types";
+import { Goal } from "./types";
+import { MatchProtocol, Score } from "./types/interfaces";
 
-class Match implements MatchProtocol {
+export class Match implements MatchProtocol {
   public readonly id: number;
   public readonly homeTeam: Team;
   public readonly awayTeam: Team;
@@ -66,5 +67,3 @@ class Match implements MatchProtocol {
     return [team1Goals, team2Goals];
   }
 }
-
-export default Match;

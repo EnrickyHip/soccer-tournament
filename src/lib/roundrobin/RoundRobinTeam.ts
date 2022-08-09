@@ -1,7 +1,8 @@
-import Team from "./Team";
-import { MatchProtocol, Result, RoundRobinTeamProtocol } from "./types";
+import Team from "../Team";
+import { Result } from "../types";
+import { MatchProtocol, RoundRobinTeamProtocol } from "../types/interfaces";
 
-class RoundRobinTeam extends Team implements RoundRobinTeamProtocol {
+export class RoundRobinTeam extends Team implements RoundRobinTeamProtocol {
   public wins = 0;
   public draws = 0;
   public losses = 0;
@@ -23,7 +24,7 @@ class RoundRobinTeam extends Team implements RoundRobinTeamProtocol {
   }
 
   get lastMatches(): MatchProtocol[] {
-    return this.matches.slice(-5);
+    return this.matchesPlayedArray.slice(-5);
   }
 
   get lastResults(): Result[] {
@@ -84,5 +85,3 @@ class RoundRobinTeam extends Team implements RoundRobinTeamProtocol {
     this.losses = 0;
   }
 }
-
-export default RoundRobinTeam;

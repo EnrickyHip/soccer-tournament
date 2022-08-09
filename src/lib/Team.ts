@@ -1,4 +1,4 @@
-import type { MatchesObject, MatchProtocol } from "./types";
+import { MatchesObject, MatchProtocol } from "./types/interfaces";
 
 abstract class Team {
   public readonly id: number;

@@ -1,6 +1,6 @@
-import { RoundRobinTeamProtocol, TieBreak } from "./types";
+import { RoundRobinTeamProtocol, TieBreak } from "../../types/interfaces";
 
-export default class CustomTieBreaker implements TieBreak {
+export class CustomTieBreaker implements TieBreak {
   getAttributes: (team1: RoundRobinTeamProtocol, team2: RoundRobinTeamProtocol) => [number, number];
 
   constructor(getAttributes: (team1: RoundRobinTeamProtocol, team2: RoundRobinTeamProtocol) => [number, number]) {
