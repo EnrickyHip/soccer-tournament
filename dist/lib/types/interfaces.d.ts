@@ -52,3 +52,6 @@ export interface SortProtocol {
     customSort(attribute?: SortableAttribute, sentDirection?: 1 | -1): (team1: RoundRobinTeamProtocol, team2: RoundRobinTeamProtocol) => number;
     positionSort(team1: RoundRobinTeamProtocol, team2: RoundRobinTeamProtocol): 0 | 1 | -1;
 }
+export interface RoundRobinTournamentProtocol extends Tournament {
+    sortTeams(attribute?: SortableAttribute, direction?: 1 | -1): void;
+}

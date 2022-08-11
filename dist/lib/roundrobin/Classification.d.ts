@@ -1,9 +1,9 @@
-import { ClassificationOptions, ClassificationProtocol } from "../types/interfaces";
-import { RoundRobinTeam } from "./RoundRobinTeam";
+import { ClassificationOptions, ClassificationProtocol, RoundRobinTeamProtocol, RoundRobinTournamentProtocol } from "../types/interfaces";
 declare class Classification implements ClassificationProtocol {
     private readonly classification;
-    constructor(classification: ClassificationOptions);
-    get(team: RoundRobinTeam): string | null;
+    private readonly tournament;
+    constructor(classification: ClassificationOptions, tournament: RoundRobinTournamentProtocol);
+    get(team: RoundRobinTeamProtocol): string | null;
     private isClassified;
 }
 export default Classification;

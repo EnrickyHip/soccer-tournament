@@ -26,13 +26,19 @@ abstract class Team {
   }
 
   public goalsInMatches(matches: MatchProtocol[]): number {
-    return matches.reduce((goals: number, match) => {
-      const [selfScore] = match.getTeamScore(this);
-      return goals + selfScore;
-    }, 0);
+    try {
+      return matches.reduce((goals: number, match) => {
+        const [selfScore] = match.getTeamScore(this);
+        return goals + selfScore;
+      }, 0);
+    } catch (error) {
+      throw new Error("This team doest not belong to some match which was passed was an argument");
+    }
   }
 
+  //* esse método não é recomendado o uso na lib
   public addMatch(match: MatchProtocol) {
+    if (this.matchesObject[match.id]) throw new Error("Match id already exists!");
     this.matchesObject[match.id] = match;
   }
 

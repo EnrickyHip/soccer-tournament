@@ -1,56 +1,33 @@
 import type Team from "./Team";
 import { Goal } from "./types";
-import { MatchProtocol, Score } from "./types/interfaces";
+import { MatchProtocol, Score, Tournament } from "./types/interfaces";
 
-export class Match implements MatchProtocol {
+export abstract class Match implements MatchProtocol {
   public readonly id: number;
   public readonly homeTeam: Team;
   public readonly awayTeam: Team;
   public isPlayed = false;
   public score: Score = { homeTeam: null, awayTeam: null };
+  protected readonly tournament: Tournament | null;
 
-  constructor(homeTeam: Team, awayTeam: Team, id: number) {
+  constructor(homeTeam: Team, awayTeam: Team, id: number, tournament: Tournament | null) {
     this.id = id;
     this.homeTeam = homeTeam;
     this.awayTeam = awayTeam;
+    this.tournament = tournament;
   }
 
-  //* seria mais interessante mandar um score inteiro talvez...
-  play(homeGoals: Goal, awayGoals: Goal): void {
-    const { homeTeam, awayTeam } = this.score;
-    if (homeTeam === homeGoals && awayTeam === awayGoals) return;
-
-    this.score.homeTeam = homeGoals;
-    this.score.awayTeam = awayGoals;
-
-    if (homeGoals === null || awayGoals === null) {
-      this.isPlayed = false;
-    } else {
-      this.isPlayed = true;
-    }
-
-    this.homeTeam.playMatch(this);
-    this.awayTeam.playMatch(this);
-  }
+  abstract play(homeGoals: Goal, awayGoals: Goal): void;
 
   getTeamScore(team: Team): number[] {
+    if (team !== this.homeTeam && team !== this.awayTeam) {
+      throw new Error("Team passed as an argument does not belongs to this match");
+    }
+
     const { homeTeam: homeTeamGoals, awayTeam: awayTeamGoals } = this.score;
-    const selfScore = this.homeTeam.name === team.name ? (homeTeamGoals as number) : (awayTeamGoals as number);
-    const otherScore = this.homeTeam.name === team.name ? (awayTeamGoals as number) : (homeTeamGoals as number);
+    const selfScore = this.homeTeam === team ? (homeTeamGoals as number) : (awayTeamGoals as number);
+    const otherScore = this.homeTeam === team ? (awayTeamGoals as number) : (homeTeamGoals as number);
     return [selfScore, otherScore];
-  }
-
-  //? não sei se é uma boa ideia instanciar um objeto da classe dentro da própria classe (mesmo sendo estático????)
-  static create(teams: Team[], id: number): MatchProtocol {
-    const homeTeam = teams[0];
-    const visitingTeam = teams[1];
-
-    const match = new Match(homeTeam, visitingTeam, id);
-
-    homeTeam.addMatch(match);
-    visitingTeam.addMatch(match);
-
-    return match;
   }
 
   static getMatchesBetween(team1: Team, team2: Team): MatchProtocol[] {

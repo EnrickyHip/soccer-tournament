@@ -41,11 +41,17 @@ export class RoundRobinTeam extends Team implements RoundRobinTeamProtocol {
     return this._position;
   }
 
+  //* esse método não é recomendado o uso na lib
   setPosition(position: number) {
     this._position = position;
   }
 
+  //* esse método não é recomendado o uso na lib
   playMatch(match: MatchProtocol): void {
+    if (!this.matchesObject[match.id]) {
+      throw new Error("this team does not belongs to the sent match");
+    }
+
     if (match.score.homeTeam === null || match.score.awayTeam === null) {
       delete this.matchesPlayedObject[match.id];
     } else {

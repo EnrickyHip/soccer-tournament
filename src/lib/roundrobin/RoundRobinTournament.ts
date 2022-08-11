@@ -1,5 +1,4 @@
 import roundrobin, { type Rounds } from "roundrobin-tournament-js";
-import { Match } from "../Match";
 import { Round, SortableAttribute, Tournament } from "../types";
 import {
   ClassificationOptions,
@@ -11,11 +10,11 @@ import {
 } from "../types/interfaces";
 
 import Classification from "./Classification";
+import { RoundRobinMatch } from "./RoundRobinMatch";
 import RoundRobinSort from "./RoundRobinSort";
-import { RoundRobinTeam } from "./RoundRobinTeam";
 
 export class RoundRobinTournament implements Tournament {
-  public readonly teams: RoundRobinTeam[];
+  public readonly teams: RoundRobinTeamProtocol[];
   public readonly matches: MatchProtocol[] = [];
   public readonly rounds: Round[];
   public readonly classification: ClassificationProtocol;
@@ -23,14 +22,14 @@ export class RoundRobinTournament implements Tournament {
   private readonly sort: SortProtocol;
 
   constructor(
-    teams: RoundRobinTeam[],
+    teams: RoundRobinTeamProtocol[],
     secondRound: boolean,
     classification: ClassificationOptions,
     tieBreaks: TieBreak[],
   ) {
     this.teams = teams;
     this.secondRound = secondRound;
-    this.classification = new Classification(classification);
+    this.classification = new Classification(classification, this);
     this.sort = new RoundRobinSort(tieBreaks);
     this.rounds = this.createRounds();
     this.sortTeams();
@@ -45,14 +44,13 @@ export class RoundRobinTournament implements Tournament {
     return rounds.map((round: RoundRobinTeamProtocol[][]) => {
       return round.map((teams: RoundRobinTeamProtocol[]) => {
         const id = this.matches.length;
-        const newMatch = Match.create(teams, id);
+        const newMatch = RoundRobinMatch.create(teams, id, this);
         this.matches.push(newMatch);
         return newMatch;
       });
     });
   }
 
-  //* seria interessante se toda vez que uma partida fosse jogada esse método automaticamente fosse executado.
   public sortTeams(attribute?: SortableAttribute, direction?: 1 | -1): void {
     this.teams.sort(this.sort.positionSort);
     this.teams.forEach((team, index) => {

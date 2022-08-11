@@ -42,10 +42,15 @@ class RoundRobinTeam extends Team_1.default {
     get position() {
         return this._position;
     }
+    //* esse método não é recomendado o uso na lib
     setPosition(position) {
         this._position = position;
     }
+    //* esse método não é recomendado o uso na lib
     playMatch(match) {
+        if (!this.matchesObject[match.id]) {
+            throw new Error("this team does not belongs to the sent match");
+        }
         if (match.score.homeTeam === null || match.score.awayTeam === null) {
             delete this.matchesPlayedObject[match.id];
         }
