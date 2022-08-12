@@ -1,8 +1,8 @@
+import { Match } from "../Match";
 import Team from "../Team";
 import { Result } from "../types";
-import { MatchProtocol, RoundRobinTeamProtocol } from "../types/interfaces";
 
-export class RoundRobinTeam extends Team implements RoundRobinTeamProtocol {
+export class RoundRobinTeam extends Team {
   public wins = 0;
   public draws = 0;
   public losses = 0;
@@ -23,7 +23,7 @@ export class RoundRobinTeam extends Team implements RoundRobinTeamProtocol {
     return (this.points * 100) / (this.matchesPlayed * 3);
   }
 
-  get lastMatches(): MatchProtocol[] {
+  get lastMatches(): Match[] {
     return this.matchesPlayedArray.slice(-5);
   }
 
@@ -47,7 +47,7 @@ export class RoundRobinTeam extends Team implements RoundRobinTeamProtocol {
   }
 
   //* esse método não é recomendado o uso na lib
-  playMatch(match: MatchProtocol): void {
+  playMatch(match: Match): void {
     if (!this.matchesObject[match.id]) {
       throw new Error("this team does not belongs to the sent match");
     }
@@ -63,12 +63,12 @@ export class RoundRobinTeam extends Team implements RoundRobinTeamProtocol {
 
   private calculatePoints(): void {
     this.resetValues();
-    this.matchesPlayedArray.forEach((match: MatchProtocol) => {
+    this.matchesPlayedArray.forEach((match: Match) => {
       this.calculateMatch(match);
     });
   }
 
-  private calculateMatch(match: MatchProtocol): void {
+  private calculateMatch(match: Match): void {
     const [selfScore, otherScore] = match.getTeamScore(this);
 
     this.goals += selfScore;

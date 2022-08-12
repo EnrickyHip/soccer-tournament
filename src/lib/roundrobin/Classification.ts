@@ -1,9 +1,5 @@
-import {
-  ClassificationOptions,
-  ClassificationProtocol,
-  RoundRobinTeamProtocol,
-  RoundRobinTournamentProtocol,
-} from "../types/interfaces";
+import { ClassificationOptions, ClassificationProtocol, RoundRobinTournamentProtocol } from "../types/interfaces";
+import { RoundRobinTeam } from "./RoundRobinTeam";
 
 class Classification implements ClassificationProtocol {
   private readonly classification: ClassificationOptions;
@@ -14,7 +10,7 @@ class Classification implements ClassificationProtocol {
     this.tournament = tournament;
   }
 
-  get(team: RoundRobinTeamProtocol): string | null {
+  get(team: RoundRobinTeam): string | null {
     if (!this.tournament.teams.includes(team)) {
       throw new Error("Team passed as argument does not belongs to this tournament!");
     }

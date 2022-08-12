@@ -1,19 +1,15 @@
 import { Match } from "../Match";
 import { Goal } from "../types";
-import { MatchProtocol, RoundRobinTeamProtocol, RoundRobinTournamentProtocol } from "../types/interfaces";
+import { RoundRobinTeam } from "./RoundRobinTeam";
+import { RoundRobinTournament } from "./RoundRobinTournament";
 
 export class RoundRobinMatch extends Match {
   public readonly id: number;
-  public readonly homeTeam: RoundRobinTeamProtocol;
-  public readonly awayTeam: RoundRobinTeamProtocol;
-  protected readonly tournament: RoundRobinTournamentProtocol;
+  public readonly homeTeam: RoundRobinTeam;
+  public readonly awayTeam: RoundRobinTeam;
+  protected readonly tournament: RoundRobinTournament;
 
-  constructor(
-    homeTeam: RoundRobinTeamProtocol,
-    awayTeam: RoundRobinTeamProtocol,
-    id: number,
-    tournament: RoundRobinTournamentProtocol,
-  ) {
+  constructor(homeTeam: RoundRobinTeam, awayTeam: RoundRobinTeam, id: number, tournament: RoundRobinTournament) {
     super(homeTeam, awayTeam, id, tournament);
     this.id = id;
     this.homeTeam = homeTeam;
@@ -40,7 +36,7 @@ export class RoundRobinMatch extends Match {
     this.tournament.sortTeams();
   }
 
-  static create(teams: RoundRobinTeamProtocol[], id: number, tournament: RoundRobinTournamentProtocol): MatchProtocol {
+  static create(teams: RoundRobinTeam[], id: number, tournament: RoundRobinTournament): RoundRobinMatch {
     const visitingTeam = teams[1];
     const homeTeam = teams[0];
 

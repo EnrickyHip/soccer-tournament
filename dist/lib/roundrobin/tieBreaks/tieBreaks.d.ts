@@ -1,12 +1,13 @@
 import { SortableAttribute } from "../../types";
-import { RoundRobinTeamProtocol, TieBreak } from "../../types/interfaces";
+import { TieBreak } from "../../types/interfaces";
+import { RoundRobinTeam } from "../RoundRobinTeam";
 declare class AttributeTieBreak implements TieBreak {
     private attribute;
     constructor(attribute: SortableAttribute);
-    getAttributes: (team1: RoundRobinTeamProtocol, team2: RoundRobinTeamProtocol) => [number, number];
+    getAttributes: (team1: RoundRobinTeam, team2: RoundRobinTeam) => [number, number];
 }
 declare class HeadToHeadTieBreak implements TieBreak {
-    getAttributes: (team1: RoundRobinTeamProtocol, team2: RoundRobinTeamProtocol) => [number, number];
+    getAttributes: (team1: RoundRobinTeam, team2: RoundRobinTeam) => [number, number];
 }
 export declare const tieBreaks: {
     wins: AttributeTieBreak;

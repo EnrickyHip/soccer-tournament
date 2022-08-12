@@ -1,4 +1,5 @@
-import { MatchesObject, MatchProtocol } from "./types/interfaces";
+import { Match } from "./Match";
+import { MatchesObject } from "./types/interfaces";
 
 abstract class Team {
   public readonly id: number;
@@ -13,11 +14,11 @@ abstract class Team {
     this.id = id;
   }
 
-  get matches(): MatchProtocol[] {
+  get matches(): Match[] {
     return Object.values(this.matchesObject);
   }
 
-  get matchesPlayedArray(): MatchProtocol[] {
+  get matchesPlayedArray(): Match[] {
     return Object.values(this.matchesPlayedObject);
   }
 
@@ -25,7 +26,7 @@ abstract class Team {
     return this.matchesPlayedArray.length;
   }
 
-  public goalsInMatches(matches: MatchProtocol[]): number {
+  public goalsInMatches(matches: Match[]): number {
     try {
       return matches.reduce((goals: number, match) => {
         const [selfScore] = match.getTeamScore(this);
@@ -37,12 +38,12 @@ abstract class Team {
   }
 
   //* esse método não é recomendado o uso na lib
-  public addMatch(match: MatchProtocol) {
+  public addMatch(match: Match) {
     if (this.matchesObject[match.id]) throw new Error("Match id already exists!");
     this.matchesObject[match.id] = match;
   }
 
-  abstract playMatch(match: MatchProtocol): void;
+  abstract playMatch(match: Match): void;
 }
 
 export default Team;

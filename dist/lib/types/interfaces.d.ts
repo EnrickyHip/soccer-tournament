@@ -1,10 +1,11 @@
+import { RoundRobinTeam } from "../roundrobin";
 import Team from "../Team";
-import { Goal, Result, SortableAttribute } from "./types";
+import { Goal, SortableAttribute } from "./types";
 export interface MatchesObject {
     [id: number]: MatchProtocol;
 }
 export interface TieBreak {
-    getAttributes: (team1: RoundRobinTeamProtocol, team2: RoundRobinTeamProtocol) => [number, number];
+    getAttributes: (team1: RoundRobinTeam, team2: RoundRobinTeam) => [number, number];
 }
 export interface MinMax {
     min: number;
@@ -22,21 +23,7 @@ export interface Tournament {
     matches: MatchProtocol[];
 }
 export interface ClassificationProtocol {
-    get(team: RoundRobinTeamProtocol): string | null;
-}
-export interface RoundRobinTeamProtocol extends Team {
-    wins: number;
-    draws: number;
-    losses: number;
-    goals: number;
-    counterGoals: number;
-    points: number;
-    position: number;
-    goalDifference: number;
-    percentage: number;
-    lastMatches: MatchProtocol[];
-    lastResults: Result[];
-    setPosition(index: number): void;
+    get(team: RoundRobinTeam): string | null;
 }
 export interface MatchProtocol {
     readonly id: number;
@@ -49,8 +36,8 @@ export interface MatchProtocol {
 }
 export interface SortProtocol {
     sortAttribute: SortableAttribute;
-    customSort(attribute?: SortableAttribute, sentDirection?: 1 | -1): (team1: RoundRobinTeamProtocol, team2: RoundRobinTeamProtocol) => number;
-    positionSort(team1: RoundRobinTeamProtocol, team2: RoundRobinTeamProtocol): 0 | 1 | -1;
+    positionSort(team1: RoundRobinTeam, team2: RoundRobinTeam): 0 | 1 | -1;
+    customSort(attribute?: SortableAttribute, sentDirection?: 1 | -1): (team1: RoundRobinTeam, team2: RoundRobinTeam) => number;
 }
 export interface RoundRobinTournamentProtocol extends Tournament {
     sortTeams(attribute?: SortableAttribute, direction?: 1 | -1): void;

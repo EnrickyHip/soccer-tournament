@@ -1,28 +1,22 @@
 import roundrobin, { type Rounds } from "roundrobin-tournament-js";
 import { Round, SortableAttribute, Tournament } from "../types";
-import {
-  ClassificationOptions,
-  ClassificationProtocol,
-  MatchProtocol,
-  RoundRobinTeamProtocol,
-  SortProtocol,
-  TieBreak,
-} from "../types/interfaces";
+import { ClassificationOptions, ClassificationProtocol, SortProtocol, TieBreak } from "../types/interfaces";
 
 import Classification from "./Classification";
 import { RoundRobinMatch } from "./RoundRobinMatch";
 import RoundRobinSort from "./RoundRobinSort";
+import { RoundRobinTeam } from "./RoundRobinTeam";
 
 export class RoundRobinTournament implements Tournament {
-  public readonly teams: RoundRobinTeamProtocol[];
-  public readonly matches: MatchProtocol[] = [];
+  public readonly teams: RoundRobinTeam[];
+  public readonly matches: RoundRobinMatch[] = [];
   public readonly rounds: Round[];
   public readonly classification: ClassificationProtocol;
   private readonly secondRound: boolean;
   private readonly sort: SortProtocol;
 
   constructor(
-    teams: RoundRobinTeamProtocol[],
+    teams: RoundRobinTeam[],
     secondRound: boolean,
     classification: ClassificationOptions,
     tieBreaks: TieBreak[],
@@ -40,9 +34,9 @@ export class RoundRobinTournament implements Tournament {
     return this.createMatches(rounds);
   }
 
-  private createMatches(rounds: Rounds<RoundRobinTeamProtocol>): Round[] {
-    return rounds.map((round: RoundRobinTeamProtocol[][]) => {
-      return round.map((teams: RoundRobinTeamProtocol[]) => {
+  private createMatches(rounds: Rounds<RoundRobinTeam>): Round[] {
+    return rounds.map((round: RoundRobinTeam[][]) => {
+      return round.map((teams: RoundRobinTeam[]) => {
         const id = this.matches.length;
         const newMatch = RoundRobinMatch.create(teams, id, this);
         this.matches.push(newMatch);

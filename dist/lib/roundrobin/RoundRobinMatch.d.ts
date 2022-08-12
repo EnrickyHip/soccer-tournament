@@ -1,12 +1,13 @@
 import { Match } from "../Match";
 import { Goal } from "../types";
-import { MatchProtocol, RoundRobinTeamProtocol, RoundRobinTournamentProtocol } from "../types/interfaces";
+import { RoundRobinTeam } from "./RoundRobinTeam";
+import { RoundRobinTournament } from "./RoundRobinTournament";
 export declare class RoundRobinMatch extends Match {
     readonly id: number;
-    readonly homeTeam: RoundRobinTeamProtocol;
-    readonly awayTeam: RoundRobinTeamProtocol;
-    protected readonly tournament: RoundRobinTournamentProtocol;
-    constructor(homeTeam: RoundRobinTeamProtocol, awayTeam: RoundRobinTeamProtocol, id: number, tournament: RoundRobinTournamentProtocol);
+    readonly homeTeam: RoundRobinTeam;
+    readonly awayTeam: RoundRobinTeam;
+    protected readonly tournament: RoundRobinTournament;
+    constructor(homeTeam: RoundRobinTeam, awayTeam: RoundRobinTeam, id: number, tournament: RoundRobinTournament);
     play(homeGoals: Goal, awayGoals: Goal): void;
-    static create(teams: RoundRobinTeamProtocol[], id: number, tournament: RoundRobinTournamentProtocol): MatchProtocol;
+    static create(teams: RoundRobinTeam[], id: number, tournament: RoundRobinTournament): RoundRobinMatch;
 }

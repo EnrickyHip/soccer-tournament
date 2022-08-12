@@ -1,5 +1,6 @@
 import { SortableAttribute } from "../types";
-import { RoundRobinTeamProtocol, SortProtocol, TieBreak } from "../types/interfaces";
+import { SortProtocol, TieBreak } from "../types/interfaces";
+import { RoundRobinTeam } from "./RoundRobinTeam";
 
 export default class RoundRobinSort implements SortProtocol {
   private tieBreaks: TieBreak[];
@@ -13,7 +14,7 @@ export default class RoundRobinSort implements SortProtocol {
     if (attribute) this.sortAttribute = attribute;
     const direction = sentDirection || 1;
 
-    return (team1: RoundRobinTeamProtocol, team2: RoundRobinTeamProtocol) => {
+    return (team1: RoundRobinTeam, team2: RoundRobinTeam) => {
       if (attribute !== "position") {
         if (team1[this.sortAttribute] < team2[this.sortAttribute]) return 1 * direction;
         if (team1[this.sortAttribute] > team2[this.sortAttribute]) return -1 * direction;
@@ -25,7 +26,7 @@ export default class RoundRobinSort implements SortProtocol {
     };
   };
 
-  public positionSort = (team1: RoundRobinTeamProtocol, team2: RoundRobinTeamProtocol) => {
+  public positionSort = (team1: RoundRobinTeam, team2: RoundRobinTeam) => {
     if (team1.points > team2.points) return -1; // -1 still the same
     if (team1.points < team2.points) return 1; // 1 changes the position
 

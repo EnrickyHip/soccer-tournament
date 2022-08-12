@@ -1,7 +1,7 @@
+import { Match } from "../Match";
 import Team from "../Team";
 import { Result } from "../types";
-import { MatchProtocol, RoundRobinTeamProtocol } from "../types/interfaces";
-export declare class RoundRobinTeam extends Team implements RoundRobinTeamProtocol {
+export declare class RoundRobinTeam extends Team {
     wins: number;
     draws: number;
     losses: number;
@@ -11,11 +11,11 @@ export declare class RoundRobinTeam extends Team implements RoundRobinTeamProtoc
     get points(): number;
     get goalDifference(): number;
     get percentage(): number;
-    get lastMatches(): MatchProtocol[];
+    get lastMatches(): Match[];
     get lastResults(): Result[];
     get position(): number;
     setPosition(position: number): void;
-    playMatch(match: MatchProtocol): void;
+    playMatch(match: Match): void;
     private calculatePoints;
     private calculateMatch;
     private resetValues;

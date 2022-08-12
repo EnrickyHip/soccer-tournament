@@ -30,8 +30,8 @@ export abstract class Match implements MatchProtocol {
     return [selfScore, otherScore];
   }
 
-  static getMatchesBetween(team1: Team, team2: Team): MatchProtocol[] {
-    return team1.matches.filter((match: MatchProtocol) => {
+  static getMatchesBetween(team1: Team, team2: Team): Match[] {
+    return team1.matches.filter((match) => {
       const { homeTeam, awayTeam } = match;
       return (homeTeam === team1 && awayTeam === team2) || (homeTeam === team2 && awayTeam === team1);
     });

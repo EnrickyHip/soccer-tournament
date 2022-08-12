@@ -1,4 +1,5 @@
-import { MatchesObject, MatchProtocol } from "./types/interfaces";
+import { Match } from "./Match";
+import { MatchesObject } from "./types/interfaces";
 declare abstract class Team {
     readonly id: number;
     readonly name: string;
@@ -6,11 +7,11 @@ declare abstract class Team {
     protected readonly matchesObject: MatchesObject;
     protected readonly matchesPlayedObject: MatchesObject;
     constructor(name: string, shield: string, id: number);
-    get matches(): MatchProtocol[];
-    get matchesPlayedArray(): MatchProtocol[];
+    get matches(): Match[];
+    get matchesPlayedArray(): Match[];
     get matchesPlayed(): number;
-    goalsInMatches(matches: MatchProtocol[]): number;
-    addMatch(match: MatchProtocol): void;
-    abstract playMatch(match: MatchProtocol): void;
+    goalsInMatches(matches: Match[]): number;
+    addMatch(match: Match): void;
+    abstract playMatch(match: Match): void;
 }
 export default Team;
