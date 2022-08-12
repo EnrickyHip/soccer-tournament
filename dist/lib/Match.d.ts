@@ -1,7 +1,7 @@
 import type Team from "./Team";
 import { Goal } from "./types";
-import { MatchProtocol, Score, Tournament } from "./types/interfaces";
-export declare abstract class Match implements MatchProtocol {
+import { Score, Tournament } from "./types/interfaces";
+export declare abstract class Match {
     readonly id: number;
     readonly homeTeam: Team;
     readonly awayTeam: Team;

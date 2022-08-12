@@ -1,8 +1,9 @@
+import { Match } from "../Match";
 import { RoundRobinTeam } from "../roundrobin";
 import Team from "../Team";
 import { Goal, SortableAttribute } from "./types";
 export interface MatchesObject {
-    [id: number]: MatchProtocol;
+    [id: number]: Match;
 }
 export interface TieBreak {
     getAttributes: (team1: RoundRobinTeam, team2: RoundRobinTeam) => [number, number];
@@ -20,19 +21,10 @@ export interface ClassificationOptions {
 }
 export interface Tournament {
     teams: Team[];
-    matches: MatchProtocol[];
+    matches: Match[];
 }
 export interface ClassificationProtocol {
     get(team: RoundRobinTeam): string | null;
-}
-export interface MatchProtocol {
-    readonly id: number;
-    readonly homeTeam: Team;
-    readonly awayTeam: Team;
-    isPlayed: boolean;
-    score: Score;
-    play(homeGoals: Goal, awayGoals: Goal): void;
-    getTeamScore(team: Team): number[];
 }
 export interface SortProtocol {
     sortAttribute: SortableAttribute;

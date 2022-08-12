@@ -1,5 +1,5 @@
+import { Match } from "../Match";
 import { RoundRobinTeam } from "../roundrobin";
-import { MatchProtocol } from "./interfaces";
 
 /* criará um novo tipo com todas as chaves que forem do tipo passado como parâmetro
 [Key in keyof Object] -> faz uma iteração entre todas as chaves do objeto
@@ -11,7 +11,7 @@ type KeysType<Obj, Type> = {
   [Key in keyof Obj]: Obj[Key] extends Type ? Key : never;
 }[keyof Obj];
 
-export type Round = MatchProtocol[];
+export type Round = Match[];
 export type Goal = number | null;
 export type Result = "win" | "draw" | "lose";
 export type SortableAttribute = KeysType<RoundRobinTeam, number>;
