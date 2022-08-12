@@ -9,7 +9,10 @@
   ],
   "repository": "https://github.com/EnrickyHip/soccer-tournament",
   "homepage": "https://github.com/EnrickyHip/soccer-tournament",
-  "scripts": {},
+  "scripts": {
+    "test": "jest",
+    "test:silent": "jest --watchAll --silent --noStackTrace"
+  },
   "keywords": [],
   "author": "EnrickyHip",
   "license": "MIT",

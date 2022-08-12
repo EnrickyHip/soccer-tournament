@@ -1,2 +1,2 @@
-export * from "./customTieBreaker";
+export * from "./CustomTieBreaker";
 export * from "./tieBreaks";
