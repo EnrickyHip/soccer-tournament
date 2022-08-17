@@ -1,14 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 class Classification {
-    constructor(classification, tournament) {
+    constructor(classification) {
         this.classification = classification;
-        this.tournament = tournament;
     }
     get(team) {
-        if (!this.tournament.teams.includes(team)) {
-            throw new Error("Team passed as argument does not belongs to this tournament!");
-        }
         const { position } = team;
         if (position === 1)
             return "first";

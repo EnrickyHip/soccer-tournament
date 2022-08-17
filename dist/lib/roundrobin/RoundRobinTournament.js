@@ -13,7 +13,7 @@ class RoundRobinTournament {
         this.matches = [];
         this.teams = teams;
         this.secondRound = secondRound;
-        this.classification = new Classification_1.default(classification, this);
+        this.classification = new Classification_1.default(classification);
         this.sort = new RoundRobinSort_1.default(tieBreaks);
         this.rounds = this.createRounds();
         this.sortTeams();
@@ -33,11 +33,11 @@ class RoundRobinTournament {
         });
     }
     sortTeams(attribute, direction) {
-        this.teams.sort(this.sort.positionSort);
+        this.teams.sort(this.sort.positionSort());
         this.teams.forEach((team, index) => {
             team.setPosition(index + 1);
         });
-        if (attribute !== undefined || this.sort.sortAttribute !== "position") {
+        if (attribute !== undefined || this.sort.currentAttribute !== "position") {
             this.teams.sort(this.sort.customSort(attribute, direction));
         }
     }

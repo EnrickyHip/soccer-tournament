@@ -46,24 +46,12 @@ class RoundRobinTeam extends Team_1.default {
     setPosition(position) {
         this._position = position;
     }
-    //* esse método não é recomendado o uso na lib
-    playMatch(match) {
-        if (!this.matchesObject[match.id]) {
-            throw new Error("this team does not belongs to the sent match");
-        }
-        if (match.score.homeTeam === null || match.score.awayTeam === null) {
-            delete this.matchesPlayedObject[match.id];
-        }
-        else {
-            this.matchesPlayedObject[match.id] = match;
-        }
-        this.calculatePoints();
-    }
     calculatePoints() {
         this.resetValues();
         this.matchesPlayedArray.forEach((match) => {
             this.calculateMatch(match);
         });
+        return this.points;
     }
     calculateMatch(match) {
         const [selfScore, otherScore] = match.getTeamScore(this);

@@ -1,20 +1,14 @@
-import { ClassificationOptions, ClassificationProtocol, RoundRobinTournamentProtocol } from "../types/interfaces";
+import { ClassificationOptions, ClassificationProtocol } from "../types/interfaces";
 import { RoundRobinTeam } from "./RoundRobinTeam";
 
 class Classification implements ClassificationProtocol {
   private readonly classification: ClassificationOptions;
-  private readonly tournament: RoundRobinTournamentProtocol;
 
-  constructor(classification: ClassificationOptions, tournament: RoundRobinTournamentProtocol) {
+  constructor(classification: ClassificationOptions) {
     this.classification = classification;
-    this.tournament = tournament;
   }
 
   get(team: RoundRobinTeam): string | null {
-    if (!this.tournament.teams.includes(team)) {
-      throw new Error("Team passed as argument does not belongs to this tournament!");
-    }
-
     const { position } = team;
     if (position === 1) return "first";
 

@@ -11,9 +11,6 @@ class RoundRobinMatch extends Match_1.Match {
         this.tournament = tournament;
     }
     play(homeGoals, awayGoals) {
-        const { homeTeam, awayTeam } = this.score;
-        if (homeTeam === homeGoals && awayTeam === awayGoals)
-            return;
         this.score.homeTeam = homeGoals;
         this.score.awayTeam = awayGoals;
         if (homeGoals === null || awayGoals === null) {
@@ -22,8 +19,8 @@ class RoundRobinMatch extends Match_1.Match {
         else {
             this.isPlayed = true;
         }
-        this.homeTeam.playMatch(this);
-        this.awayTeam.playMatch(this);
+        this.homeTeam.calculatePoints();
+        this.awayTeam.calculatePoints();
         this.tournament.sortTeams();
     }
     static create(teams, id, tournament) {

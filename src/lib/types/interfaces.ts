@@ -35,14 +35,10 @@ export interface ClassificationProtocol {
 }
 
 export interface SortProtocol {
-  sortAttribute: SortableAttribute;
-  positionSort(team1: RoundRobinTeam, team2: RoundRobinTeam): 0 | 1 | -1;
+  currentAttribute: SortableAttribute;
+  positionSort(): (team1: RoundRobinTeam, team2: RoundRobinTeam) => 0 | 1 | -1;
   customSort(
     attribute?: SortableAttribute,
     sentDirection?: 1 | -1,
   ): (team1: RoundRobinTeam, team2: RoundRobinTeam) => number;
-}
-
-export interface RoundRobinTournamentProtocol extends Tournament {
-  sortTeams(attribute?: SortableAttribute, direction?: 1 | -1): void;
 }

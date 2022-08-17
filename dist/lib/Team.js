@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class Team {
     constructor(name, shield, id) {
         this.matchesObject = {};
-        this.matchesPlayedObject = {};
         this.name = name;
         this.shield = shield;
         this.id = id;
@@ -12,7 +11,7 @@ class Team {
         return Object.values(this.matchesObject);
     }
     get matchesPlayedArray() {
-        return Object.values(this.matchesPlayedObject);
+        return Object.values(this.matchesObject).filter((match) => match.isPlayed);
     }
     get matchesPlayed() {
         return this.matchesPlayedArray.length;
@@ -32,7 +31,8 @@ class Team {
     addMatch(match) {
         if (this.matchesObject[match.id])
             throw new Error("Match id already exists!");
-        this.matchesObject[match.id] = match;
+        else
+            this.matchesObject[match.id] = match;
     }
 }
 exports.default = Team;

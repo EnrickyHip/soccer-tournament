@@ -8,9 +8,9 @@ export abstract class Match {
   public readonly awayTeam: Team;
   public isPlayed = false;
   public score: Score = { homeTeam: null, awayTeam: null };
-  protected readonly tournament: Tournament | null;
+  protected readonly tournament?: Tournament;
 
-  constructor(homeTeam: Team, awayTeam: Team, id: number, tournament: Tournament | null) {
+  constructor(homeTeam: Team, awayTeam: Team, id: number, tournament?: Tournament) {
     this.id = id;
     this.homeTeam = homeTeam;
     this.awayTeam = awayTeam;

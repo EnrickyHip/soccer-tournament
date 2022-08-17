@@ -23,7 +23,7 @@ export class RoundRobinTournament implements Tournament {
   ) {
     this.teams = teams;
     this.secondRound = secondRound;
-    this.classification = new Classification(classification, this);
+    this.classification = new Classification(classification);
     this.sort = new RoundRobinSort(tieBreaks);
     this.rounds = this.createRounds();
     this.sortTeams();
@@ -46,12 +46,12 @@ export class RoundRobinTournament implements Tournament {
   }
 
   public sortTeams(attribute?: SortableAttribute, direction?: 1 | -1): void {
-    this.teams.sort(this.sort.positionSort);
+    this.teams.sort(this.sort.positionSort());
     this.teams.forEach((team, index) => {
       team.setPosition(index + 1);
     });
 
-    if (attribute !== undefined || this.sort.sortAttribute !== "position") {
+    if (attribute !== undefined || this.sort.currentAttribute !== "position") {
       this.teams.sort(this.sort.customSort(attribute, direction));
     }
   }

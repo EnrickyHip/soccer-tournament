@@ -1,1 +1,1 @@
-{"version":3,"file":"customTieBreaker.js","sourceRoot":"","sources":["../../../../src/lib/roundrobin/tieBreaks/customTieBreaker.ts"],"names":[],"mappings":";;;AAGA,MAAa,gBAAgB;IAG3B,YAAY,aAAiF;QAC3F,IAAI,CAAC,aAAa,GAAG,aAAa,CAAC;IACrC,CAAC;CACF;AAND,4CAMC"}
+{"version":3,"file":"CustomTieBreaker.js","sourceRoot":"","sources":["../../../../src/lib/roundrobin/tieBreaks/CustomTieBreaker.ts"],"names":[],"mappings":";;;AAGA,MAAa,gBAAgB;IAG3B,YAAY,aAAiF;QAC3F,IAAI,CAAC,aAAa,GAAG,aAAa,CAAC;IACrC,CAAC;CACF;AAND,4CAMC"}

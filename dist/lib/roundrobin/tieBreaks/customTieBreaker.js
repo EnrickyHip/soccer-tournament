@@ -7,4 +7,4 @@ class CustomTieBreaker {
     }
 }
 exports.CustomTieBreaker = CustomTieBreaker;
-//# sourceMappingURL=customTieBreaker.js.map
+//# sourceMappingURL=CustomTieBreaker.js.map

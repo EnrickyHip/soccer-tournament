@@ -46,26 +46,13 @@ export class RoundRobinTeam extends Team {
     this._position = position;
   }
 
-  //* esse método não é recomendado o uso na lib
-  playMatch(match: Match): void {
-    if (!this.matchesObject[match.id]) {
-      throw new Error("this team does not belongs to the sent match");
-    }
-
-    if (match.score.homeTeam === null || match.score.awayTeam === null) {
-      delete this.matchesPlayedObject[match.id];
-    } else {
-      this.matchesPlayedObject[match.id] = match;
-    }
-
-    this.calculatePoints();
-  }
-
-  private calculatePoints(): void {
+  calculatePoints() {
     this.resetValues();
     this.matchesPlayedArray.forEach((match: Match) => {
       this.calculateMatch(match);
     });
+
+    return this.points;
   }
 
   private calculateMatch(match: Match): void {

@@ -7,8 +7,8 @@ export declare abstract class Match {
     readonly awayTeam: Team;
     isPlayed: boolean;
     score: Score;
-    protected readonly tournament: Tournament | null;
-    constructor(homeTeam: Team, awayTeam: Team, id: number, tournament: Tournament | null);
+    protected readonly tournament?: Tournament;
+    constructor(homeTeam: Team, awayTeam: Team, id: number, tournament?: Tournament);
     abstract play(homeGoals: Goal, awayGoals: Goal): void;
     getTeamScore(team: Team): number[];
     static getMatchesBetween(team1: Team, team2: Team): Match[];

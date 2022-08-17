@@ -15,8 +15,7 @@ export declare class RoundRobinTeam extends Team {
     get lastResults(): Result[];
     get position(): number;
     setPosition(position: number): void;
-    playMatch(match: Match): void;
-    private calculatePoints;
+    calculatePoints(): number;
     private calculateMatch;
     private resetValues;
 }
