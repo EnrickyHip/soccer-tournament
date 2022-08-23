@@ -3,7 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 class RoundRobinSort {
     constructor(tieBreaks) {
         this.currentAttribute = "position";
-        this.customSort = (attribute, sentDirection) => {
+        this.customSort = (sentAttribute, sentDirection) => {
+            const attribute = sentAttribute ? sentAttribute : this.currentAttribute;
             this.currentAttribute = attribute;
             const direction = sentDirection || 1;
             return (team1, team2) => {

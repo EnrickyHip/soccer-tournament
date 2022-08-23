@@ -10,7 +10,8 @@ export default class RoundRobinSort implements SortProtocol {
     this.tieBreaks = tieBreaks;
   }
 
-  public customSort = (attribute: SortableAttribute, sentDirection?: 1 | -1) => {
+  public customSort = (sentAttribute?: SortableAttribute, sentDirection?: 1 | -1) => {
+    const attribute = sentAttribute ? sentAttribute : this.currentAttribute;
     this.currentAttribute = attribute;
     const direction = sentDirection || 1;
 

@@ -21,6 +21,23 @@ describe("RoundRobinSort", () => {
       expect(sut.currentAttribute).toBe("goals");
     });
 
+    it("should keep the last attribute on call customSort with no attributes", () => {
+      const { sut } = createSut([]);
+      const teamA = { goals: 2, points: 1 } as RoundRobinTeam;
+      const teamB = { goals: 4, points: 4 } as RoundRobinTeam;
+      const teamC = { goals: 0, points: 2 } as RoundRobinTeam;
+      const teams = [teamA, teamB, teamC];
+
+      teams.sort(sut.customSort("goals"));
+      teams.sort(sut.positionSort());
+      teams.sort(sut.customSort());
+
+      expect(sut.currentAttribute).toBe("goals");
+
+      expect(teams).not.toEqual([teamB, teamC, teamA]);
+      expect(teams).toEqual([teamB, teamA, teamC]);
+    });
+
     it("should sort teams by attributes", () => {
       const { sut } = createSut([]);
 
