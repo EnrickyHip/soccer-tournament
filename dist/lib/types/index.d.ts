@@ -1,3 +1,3 @@
 import { Goal, Round, Result, SortableAttribute } from "./types";
-import { Score, Tournament } from "./interfaces";
-export { Goal, Round, Result, SortableAttribute, Score, Tournament };
+import { Score, Tournament, ClassificationOptions } from "./interfaces";
+export { Goal, Round, Result, SortableAttribute, Score, Tournament, ClassificationOptions };
