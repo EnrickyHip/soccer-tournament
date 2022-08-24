@@ -1,6 +1,6 @@
 {
   "name": "soccer-tournament",
-  "version": "0.6.1",
+  "version": "0.6.2",
   "description": "Javascript/Typescript library to create and calculate soccer tournaments.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
