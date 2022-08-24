@@ -4,7 +4,10 @@ class Classification {
     constructor(classification) {
         this.classification = classification;
     }
-    get(team) {
+    get() {
+        return this.classification;
+    }
+    getTeamClassification(team) {
         const { position } = team;
         if (position === 1)
             return "first";

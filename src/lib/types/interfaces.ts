@@ -31,7 +31,8 @@ export interface Tournament {
 }
 
 export interface ClassificationProtocol {
-  get(team: RoundRobinTeam): string | null;
+  get(): ClassificationOptions;
+  getTeamClassification(team: RoundRobinTeam): string | null;
 }
 
 export interface SortProtocol {
