@@ -9,5 +9,21 @@ const goals = new AttributeTieBreak_1.AttributeTieBreak("goals");
 const goalDifference = new AttributeTieBreak_1.AttributeTieBreak("goalDifference");
 const headToHead = new HeadToHeadTieBreak_1.HeadToHeadTieBreak();
 const HeadToHeadAwayGoals = new HeadToHeadAwayGoalsTieBreak_1.HeadToHeadAwayGoalsTieBreak();
+/**
+ * Object of built-in tie breaks.
+ *
+ * Add desired tie breaks to your tournament as an array:
+ *
+ * ```js
+ * const tournament = new RoundRobinTournament(
+ *  teams,
+ *  true,
+ *  classification,
+ *  [tieBreaks.goalDifference, tieBreaks.goals]
+ * );
+ * ```
+ *
+ * Remember that tie breaks which come first in the array have priority.
+ */
 exports.tieBreaks = { wins, goals, goalDifference, headToHead, HeadToHeadAwayGoals };
 //# sourceMappingURL=tieBreaks.js.map
