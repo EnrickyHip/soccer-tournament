@@ -3,16 +3,29 @@ import { RoundRobinTeam } from "../RoundRobinTeam";
 import { AttributeTieBreak } from "./AttributeTieBreak";
 
 describe("AttributeTieBreak", () => {
-  const createSut = (attribute: SortableAttribute) => {
+  const createSut = (attribute: SortableAttribute, reverse = false) => {
     const team1 = new RoundRobinTeam("team1", "", 1);
     const team2 = new RoundRobinTeam("team2", "", 2);
-    const sut = new AttributeTieBreak(attribute);
+    const sut = new AttributeTieBreak(attribute, reverse);
     return { sut, team1, team2 };
   };
 
-  it("should have getAttributes method", () => {
-    const { sut } = createSut("goals");
-    expect(sut).toHaveProperty("getAttributes");
+  describe("attributes", () => {
+    it("should have getAttributes method", () => {
+      const { sut } = createSut("goals");
+      expect(sut).toHaveProperty("getAttributes");
+    });
+
+    it("should have reverse attribute set as false by default", () => {
+      const { sut } = createSut("goals");
+      expect(sut).toHaveProperty("reverse");
+      expect(sut.reverse).toBe(false);
+    });
+
+    it("should change reverse if sent true in the reverse parameter", () => {
+      const { sut } = createSut("goals", true);
+      expect(sut.reverse).toBe(true);
+    });
   });
 
   describe("getAttributes", () => {

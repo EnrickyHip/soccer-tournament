@@ -10,9 +10,17 @@ describe("HeadToHeadTieBreak", () => {
     return { sut, team1, team2 };
   };
 
-  it("should have getAttributes method", () => {
-    const { sut } = createSut();
-    expect(sut).toHaveProperty("getAttributes");
+  describe("attributes", () => {
+    it("should have getAttributes method", () => {
+      const { sut } = createSut();
+      expect(sut).toHaveProperty("getAttributes");
+    });
+
+    it("should have reverse attribute set as false by default", () => {
+      const { sut } = createSut();
+      expect(sut).toHaveProperty("reverse");
+      expect(sut.reverse).toBe(false);
+    });
   });
 
   describe("getAttributes", () => {

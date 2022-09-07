@@ -6,16 +6,32 @@ describe("CustomTieBreak", () => {
     return [team1.name.length, team2.name.length];
   };
 
-  const createSut = (customMethod: (team1: RoundRobinTeam, team2: RoundRobinTeam) => [number, number]) => {
-    const sut = new CustomTieBreaker(customMethod);
+  const createSut = (
+    customMethod: (team1: RoundRobinTeam, team2: RoundRobinTeam) => [number, number],
+    reverse = false,
+  ) => {
+    const sut = new CustomTieBreaker(customMethod, reverse);
     const team1 = new RoundRobinTeam("team", "", 1);
     const team2 = new RoundRobinTeam("team2", "", 2);
     return { sut, team1, team2 };
   };
 
-  it("should have a custom method on getAttributes", () => {
-    const { sut } = createSut(customMethod);
-    expect(sut).toHaveProperty("getAttributes", customMethod);
+  describe("attributes", () => {
+    it("should have a custom method on getAttributes", () => {
+      const { sut } = createSut(customMethod);
+      expect(sut).toHaveProperty("getAttributes", customMethod);
+    });
+
+    it("should have reverse attribute set as false by default", () => {
+      const { sut } = createSut(customMethod);
+      expect(sut).toHaveProperty("reverse");
+      expect(sut.reverse).toBe(false);
+    });
+
+    it("should change reverse if sent true in the reverse parameter", () => {
+      const { sut } = createSut(customMethod, true);
+      expect(sut.reverse).toBe(true);
+    });
   });
 
   describe("getAttributes", () => {
