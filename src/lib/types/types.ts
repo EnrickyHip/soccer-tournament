@@ -15,3 +15,4 @@ export type Round = Match[];
 export type Goal = number | null;
 export type Result = "win" | "draw" | "lose";
 export type SortableAttribute = KeysType<RoundRobinTeam, number>;
+export type TieBreakGetAttributes = (team1: RoundRobinTeam, team2: RoundRobinTeam) => [number, number];

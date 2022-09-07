@@ -1,11 +1,11 @@
 import { TieBreak } from "../../types/interfaces";
-import { RoundRobinTeam } from "../RoundRobinTeam";
+import { TieBreakGetAttributes } from "../../types/types";
 
 export class CustomTieBreaker implements TieBreak {
-  public getAttributes: (team1: RoundRobinTeam, team2: RoundRobinTeam) => [number, number];
+  public getAttributes: TieBreakGetAttributes;
   public reverse: boolean;
 
-  constructor(getAttributes: (team1: RoundRobinTeam, team2: RoundRobinTeam) => [number, number], reverse = false) {
+  constructor(getAttributes: TieBreakGetAttributes, reverse = false) {
     this.getAttributes = getAttributes;
     this.reverse = reverse;
   }

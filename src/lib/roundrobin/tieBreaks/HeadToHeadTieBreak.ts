@@ -1,10 +1,10 @@
 import { Match } from "../../Match";
 import { TieBreak } from "../../types/interfaces";
-import { RoundRobinTeam } from "../RoundRobinTeam";
+import { TieBreakGetAttributes } from "../../types/types";
 
 export class HeadToHeadTieBreak implements TieBreak {
   public reverse = false;
-  public getAttributes = (team1: RoundRobinTeam, team2: RoundRobinTeam) => {
+  public getAttributes: TieBreakGetAttributes = (team1, team2) => {
     return Match.headToHeadGoals(team1, team2);
   };
 }
