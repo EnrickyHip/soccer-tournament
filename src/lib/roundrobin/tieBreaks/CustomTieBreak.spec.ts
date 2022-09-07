@@ -1,5 +1,5 @@
 import { RoundRobinTeam } from "../RoundRobinTeam";
-import { CustomTieBreaker } from "./CustomTieBreaker";
+import { CustomTieBreak } from "./CustomTieBreak";
 
 describe("CustomTieBreak", () => {
   const customMethod = (team1: RoundRobinTeam, team2: RoundRobinTeam): [number, number] => {
@@ -10,7 +10,7 @@ describe("CustomTieBreak", () => {
     customMethod: (team1: RoundRobinTeam, team2: RoundRobinTeam) => [number, number],
     reverse = false,
   ) => {
-    const sut = new CustomTieBreaker(customMethod, reverse);
+    const sut = new CustomTieBreak(customMethod, reverse);
     const team1 = new RoundRobinTeam("team", "", 1);
     const team2 = new RoundRobinTeam("team2", "", 2);
     return { sut, team1, team2 };

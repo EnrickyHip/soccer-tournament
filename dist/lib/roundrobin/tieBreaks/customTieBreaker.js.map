@@ -1,1 +1,0 @@
-{"version":3,"file":"CustomTieBreaker.js","sourceRoot":"","sources":["../../../../src/lib/roundrobin/tieBreaks/CustomTieBreaker.ts"],"names":[],"mappings":";;;AAGA,MAAa,gBAAgB;IAI3B,YAAY,aAAoC,EAAE,OAAO,GAAG,KAAK;QAC/D,IAAI,CAAC,aAAa,GAAG,aAAa,CAAC;QACnC,IAAI,CAAC,OAAO,GAAG,OAAO,CAAC;IACzB,CAAC;CACF;AARD,4CAQC"}

@@ -1,7 +1,7 @@
 import { TieBreak } from "../types/interfaces";
 import RoundRobinSort from "./RoundRobinSort";
 import { RoundRobinTeam } from "./RoundRobinTeam";
-import { CustomTieBreaker, tieBreaks } from "./tieBreaks";
+import { CustomTieBreak, tieBreaks } from "./tieBreaks";
 
 describe("RoundRobinSort", () => {
   const createSut = (tiebreaks: TieBreak[]) => {
@@ -149,10 +149,7 @@ describe("RoundRobinSort", () => {
     });
 
     it("should reverse the order if the attribute reverse of a tie break is set to true", () => {
-      const counterGoalsTieBreak = new CustomTieBreaker(
-        (team1, team2) => [team1.counterGoals, team2.counterGoals],
-        true,
-      );
+      const counterGoalsTieBreak = new CustomTieBreak((team1, team2) => [team1.counterGoals, team2.counterGoals], true);
 
       const { sut } = createSut([counterGoalsTieBreak]);
       const teamA = { name: "A", points: 3, counterGoals: 2 } as RoundRobinTeam;
