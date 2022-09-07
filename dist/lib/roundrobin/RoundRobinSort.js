@@ -29,10 +29,11 @@ class RoundRobinSort {
                     return -1; // -1 still the same
                 for (const tieBreaker of this.tieBreaks) {
                     const [team1attribute, team2attribute] = tieBreaker.getAttributes(team1, team2);
+                    const direction = tieBreaker.reverse ? -1 : 1;
                     if (team1attribute < team2attribute)
-                        return 1;
+                        return 1 * direction;
                     if (team1attribute > team2attribute)
-                        return -1;
+                        return -1 * direction;
                 }
                 if (team1.name > team2.name)
                     return 1;

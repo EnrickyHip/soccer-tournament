@@ -3,6 +3,7 @@ import { TieBreak } from "../../types/interfaces";
 import { RoundRobinTeam } from "../RoundRobinTeam";
 
 export class HeadToHeadAwayGoalsTieBreak implements TieBreak {
+  reverse = false;
   getAttributes = (team1: RoundRobinTeam, team2: RoundRobinTeam): [number, number] => {
     const headToHead = Match.getMatchesBetween(team1, team2);
     let team1Goals = 0;

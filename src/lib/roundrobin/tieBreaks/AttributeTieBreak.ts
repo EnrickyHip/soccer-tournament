@@ -4,9 +4,11 @@ import { RoundRobinTeam } from "../RoundRobinTeam";
 
 export class AttributeTieBreak implements TieBreak {
   private attribute: SortableAttribute;
+  public reverse: boolean;
 
-  constructor(attribute: SortableAttribute) {
+  constructor(attribute: SortableAttribute, reverse = false) {
     this.attribute = attribute;
+    this.reverse = reverse;
   }
 
   getAttributes = (team1: RoundRobinTeam, team2: RoundRobinTeam): [number, number] => {

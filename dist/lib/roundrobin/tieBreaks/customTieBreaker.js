@@ -2,8 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CustomTieBreaker = void 0;
 class CustomTieBreaker {
-    constructor(getAttributes) {
+    constructor(getAttributes, reverse = false) {
+        this.reverse = false;
         this.getAttributes = getAttributes;
+        this.reverse = reverse;
     }
 }
 exports.CustomTieBreaker = CustomTieBreaker;

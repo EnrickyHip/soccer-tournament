@@ -4,6 +4,7 @@ exports.HeadToHeadAwayGoalsTieBreak = void 0;
 const Match_1 = require("../../Match");
 class HeadToHeadAwayGoalsTieBreak {
     constructor() {
+        this.reverse = false;
         this.getAttributes = (team1, team2) => {
             const headToHead = Match_1.Match.getMatchesBetween(team1, team2);
             let team1Goals = 0;

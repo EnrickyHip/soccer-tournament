@@ -7,6 +7,7 @@ export interface MatchesObject {
 }
 export interface TieBreak {
     getAttributes: (team1: RoundRobinTeam, team2: RoundRobinTeam) => [number, number];
+    reverse: boolean;
 }
 export interface MinMax {
     min: number;
@@ -29,6 +30,6 @@ export interface ClassificationProtocol {
 }
 export interface SortProtocol {
     currentAttribute: SortableAttribute;
-    positionSort(): (team1: RoundRobinTeam, team2: RoundRobinTeam) => 0 | 1 | -1;
+    positionSort(): (team1: RoundRobinTeam, team2: RoundRobinTeam) => number;
     customSort(attribute?: SortableAttribute, reverse?: boolean): (team1: RoundRobinTeam, team2: RoundRobinTeam) => number;
 }
