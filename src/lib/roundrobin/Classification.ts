@@ -8,11 +8,11 @@ class Classification implements ClassificationProtocol {
     this.classification = classification;
   }
 
-  get() {
+  public get() {
     return this.classification;
   }
 
-  getTeamClassification(team: RoundRobinTeam): string | null {
+  public getTeamClassification(team: RoundRobinTeam): string | null {
     const { position } = team;
     if (position === 1) return "first";
 

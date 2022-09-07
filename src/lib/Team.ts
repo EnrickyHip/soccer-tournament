@@ -13,15 +13,15 @@ abstract class Team {
     this.id = id;
   }
 
-  get matches(): Match[] {
+  public get matches(): Match[] {
     return Object.values(this.matchesObject);
   }
 
-  get matchesPlayedArray(): Match[] {
+  public get matchesPlayedArray(): Match[] {
     return Object.values(this.matchesObject).filter((match: Match) => match.isPlayed);
   }
 
-  get matchesPlayed(): number {
+  public get matchesPlayed(): number {
     return this.matchesPlayedArray.length;
   }
 

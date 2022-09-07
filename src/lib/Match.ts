@@ -17,9 +17,9 @@ export abstract class Match {
     this.tournament = tournament;
   }
 
-  abstract play(homeGoals: Goal, awayGoals: Goal): void;
+  public abstract play(homeGoals: Goal, awayGoals: Goal): void;
 
-  getTeamScore(team: Team): number[] {
+  public getTeamScore(team: Team): number[] {
     if (team !== this.homeTeam && team !== this.awayTeam) {
       throw new Error("Team passed as an argument does not belongs to this match");
     }
@@ -30,14 +30,14 @@ export abstract class Match {
     return [selfScore, otherScore];
   }
 
-  static getMatchesBetween(team1: Team, team2: Team): Match[] {
+  public static getMatchesBetween(team1: Team, team2: Team): Match[] {
     return team1.matches.filter((match) => {
       const { homeTeam, awayTeam } = match;
       return (homeTeam === team1 && awayTeam === team2) || (homeTeam === team2 && awayTeam === team1);
     });
   }
 
-  static headToHeadGoals(team1: Team, team2: Team): [number, number] {
+  public static headToHeadGoals(team1: Team, team2: Team): [number, number] {
     const matches = Match.getMatchesBetween(team1, team2);
     const team1Goals = team1.goalsInMatches(matches);
     const team2Goals = team2.goalsInMatches(matches);

@@ -10,24 +10,24 @@ export class RoundRobinTeam extends Team {
   public counterGoals = 0;
   private _position = 0;
 
-  get points(): number {
+  public get points(): number {
     return this.wins * 3 + this.draws;
   }
 
-  get goalDifference(): number {
+  public get goalDifference(): number {
     return this.goals - this.counterGoals;
   }
 
-  get percentage(): number {
+  public get percentage(): number {
     if (this.points === 0) return 0;
     return (this.points * 100) / (this.matchesPlayed * 3);
   }
 
-  get lastMatches(): Match[] {
+  public get lastMatches(): Match[] {
     return this.matchesPlayedArray.slice(-5);
   }
 
-  get lastResults(): Result[] {
+  public get lastResults(): Result[] {
     return this.lastMatches.map((match) => {
       const [selfScore, otherScore] = match.getTeamScore(this);
 
@@ -37,16 +37,16 @@ export class RoundRobinTeam extends Team {
     });
   }
 
-  get position() {
+  public get position() {
     return this._position;
   }
 
   //* esse método não é recomendado o uso na lib
-  setPosition(position: number) {
+  public setPosition(position: number) {
     this._position = position;
   }
 
-  calculatePoints() {
+  public calculatePoints() {
     this.resetValues();
     this.matchesPlayedArray.forEach((match: Match) => {
       this.calculateMatch(match);

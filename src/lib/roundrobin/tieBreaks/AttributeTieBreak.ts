@@ -11,7 +11,7 @@ export class AttributeTieBreak implements TieBreak {
     this.reverse = reverse;
   }
 
-  getAttributes = (team1: RoundRobinTeam, team2: RoundRobinTeam): [number, number] => {
+  public getAttributes = (team1: RoundRobinTeam, team2: RoundRobinTeam): [number, number] => {
     return [team1[this.attribute], team2[this.attribute]];
   };
 }

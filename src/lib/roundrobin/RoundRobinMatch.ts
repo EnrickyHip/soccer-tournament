@@ -17,7 +17,7 @@ export class RoundRobinMatch extends Match {
     this.tournament = tournament;
   }
 
-  play(homeGoals: Goal, awayGoals: Goal): void {
+  public play(homeGoals: Goal, awayGoals: Goal): void {
     this.score.homeTeam = homeGoals;
     this.score.awayTeam = awayGoals;
 
@@ -32,7 +32,7 @@ export class RoundRobinMatch extends Match {
     this.tournament.sortTeams();
   }
 
-  static create(teams: RoundRobinTeam[], id: number, tournament: RoundRobinTournament): RoundRobinMatch {
+  public static create(teams: RoundRobinTeam[], id: number, tournament: RoundRobinTournament): RoundRobinMatch {
     const visitingTeam = teams[1];
     const homeTeam = teams[0];
 
