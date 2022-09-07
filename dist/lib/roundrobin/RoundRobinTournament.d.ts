@@ -12,5 +12,5 @@ export declare class RoundRobinTournament implements Tournament {
     constructor(teams: RoundRobinTeam[], secondRound: boolean, classification: ClassificationOptions, tieBreaks: TieBreak[]);
     private createRounds;
     private createMatches;
-    sortTeams(attribute?: SortableAttribute, direction?: 1 | -1): void;
+    sortTeams(attribute?: SortableAttribute, reverse?: boolean): void;
 }

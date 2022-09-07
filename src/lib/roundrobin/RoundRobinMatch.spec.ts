@@ -3,11 +3,11 @@ import { RoundRobinTeam } from "./RoundRobinTeam";
 import { RoundRobinTournament } from "./RoundRobinTournament";
 
 const createSut = () => {
-  const tournament = new RoundRobinTournament([], false, {}, []);
+  const tournamentMock = new RoundRobinTournament([], false, {}, []);
   const team1 = new RoundRobinTeam("team1", "", 1);
   const team2 = new RoundRobinTeam("team2", "", 2);
-  const sut = RoundRobinMatch.create([team1, team2], 1, tournament);
-  return { sut, team1, team2, tournament };
+  const sut = RoundRobinMatch.create([team1, team2], 1, tournamentMock);
+  return { sut, team1, team2, tournament: tournamentMock };
 };
 
 describe("RoundRobinMatch", () => {

@@ -30,5 +30,5 @@ export interface ClassificationProtocol {
 export interface SortProtocol {
     currentAttribute: SortableAttribute;
     positionSort(): (team1: RoundRobinTeam, team2: RoundRobinTeam) => 0 | 1 | -1;
-    customSort(attribute?: SortableAttribute, sentDirection?: 1 | -1): (team1: RoundRobinTeam, team2: RoundRobinTeam) => number;
+    customSort(attribute?: SortableAttribute, reverse?: boolean): (team1: RoundRobinTeam, team2: RoundRobinTeam) => number;
 }

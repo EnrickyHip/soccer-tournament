@@ -32,13 +32,13 @@ class RoundRobinTournament {
             });
         });
     }
-    sortTeams(attribute, direction) {
+    sortTeams(attribute, reverse = false) {
         this.teams.sort(this.sort.positionSort());
         this.teams.forEach((team, index) => {
             team.setPosition(index + 1);
         });
         if (attribute !== undefined || this.sort.currentAttribute !== "position") {
-            this.teams.sort(this.sort.customSort(attribute, direction));
+            this.teams.sort(this.sort.customSort(attribute, reverse));
         }
     }
 }

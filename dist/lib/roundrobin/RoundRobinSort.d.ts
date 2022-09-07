@@ -5,6 +5,6 @@ export default class RoundRobinSort implements SortProtocol {
     private tieBreaks;
     currentAttribute: SortableAttribute;
     constructor(tieBreaks: TieBreak[]);
-    customSort: (sentAttribute?: SortableAttribute, sentDirection?: 1 | -1) => (team1: RoundRobinTeam, team2: RoundRobinTeam) => number;
+    customSort: (sentAttribute?: SortableAttribute, reverse?: boolean) => (team1: RoundRobinTeam, team2: RoundRobinTeam) => number;
     positionSort: () => (team1: RoundRobinTeam, team2: RoundRobinTeam) => 1 | -1 | 0;
 }
