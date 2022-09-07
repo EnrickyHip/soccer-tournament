@@ -40,6 +40,6 @@ export interface SortProtocol {
   positionSort(): (team1: RoundRobinTeam, team2: RoundRobinTeam) => 0 | 1 | -1;
   customSort(
     attribute?: SortableAttribute,
-    sentDirection?: 1 | -1,
+    reverse?: boolean,
   ): (team1: RoundRobinTeam, team2: RoundRobinTeam) => number;
 }

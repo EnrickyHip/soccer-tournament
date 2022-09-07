@@ -55,11 +55,11 @@ describe("RoundRobinSort", () => {
       teams.sort(sut.customSort("wins"));
       expect(teams).toEqual([teamB, teamA, teamC]);
 
-      teams.sort(sut.customSort("wins", 1));
+      teams.sort(sut.customSort("wins", false));
       expect(teams).toEqual([teamB, teamA, teamC]);
     });
 
-    it("should invert sort direction on sent -1 as parameter on customSort", () => {
+    it("should invert sort direction if send reverse as true", () => {
       const { sut } = createSut([]);
 
       const teamA = { counterGoals: 2 } as RoundRobinTeam;
@@ -68,7 +68,7 @@ describe("RoundRobinSort", () => {
 
       const teams = [teamA, teamB, teamC];
 
-      teams.sort(sut.customSort("counterGoals", -1));
+      teams.sort(sut.customSort("counterGoals", true));
       expect(teams).toEqual([teamB, teamC, teamA]);
     });
 
@@ -83,7 +83,7 @@ describe("RoundRobinSort", () => {
       teams.sort(sut.customSort("position"));
       expect(teams).toEqual([teamC, teamA, teamB]);
 
-      teams.sort(sut.customSort("position", -1));
+      teams.sort(sut.customSort("position", true));
       expect(teams).toEqual([teamB, teamA, teamC]);
     });
   });
