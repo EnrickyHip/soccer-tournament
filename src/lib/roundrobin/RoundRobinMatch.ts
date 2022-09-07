@@ -9,7 +9,12 @@ export class RoundRobinMatch extends Match {
   public readonly awayTeam: RoundRobinTeam;
   protected readonly tournament: RoundRobinTournament;
 
-  constructor(homeTeam: RoundRobinTeam, awayTeam: RoundRobinTeam, id: number, tournament: RoundRobinTournament) {
+  private constructor(
+    homeTeam: RoundRobinTeam,
+    awayTeam: RoundRobinTeam,
+    id: number,
+    tournament: RoundRobinTournament,
+  ) {
     super(homeTeam, awayTeam, id, tournament);
     this.id = id;
     this.homeTeam = homeTeam;

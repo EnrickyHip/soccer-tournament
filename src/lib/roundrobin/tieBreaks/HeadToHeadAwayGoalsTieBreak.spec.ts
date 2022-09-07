@@ -55,5 +55,14 @@ describe("HeadToHeadAwayGoalsTieBreak", () => {
       expect(sut.getAttributes(team1, team3)).toEqual([2, 0]);
       expect(sut.getAttributes(team2, team3)).toEqual([0, 1]);
     });
+
+    it("should not count if the match is not played", () => {
+      const { sut, team1, team2 } = createSut();
+      const tournamentMock = new RoundRobinTournament([], false, {}, []);
+      RoundRobinMatch.create([team1, team2], 1, tournamentMock);
+      RoundRobinMatch.create([team2, team1], 2, tournamentMock);
+
+      expect(sut.getAttributes(team1, team2)).toEqual([0, 0]);
+    });
   });
 });

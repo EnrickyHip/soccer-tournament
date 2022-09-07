@@ -1,7 +1,7 @@
 import { TieBreak } from "../types/interfaces";
 import RoundRobinSort from "./RoundRobinSort";
 import { RoundRobinTeam } from "./RoundRobinTeam";
-import { tieBreaks } from "./tieBreaks";
+import { CustomTieBreaker, tieBreaks } from "./tieBreaks";
 
 describe("RoundRobinSort", () => {
   const createSut = (tiebreaks: TieBreak[]) => {
@@ -146,6 +146,22 @@ describe("RoundRobinSort", () => {
 
       teams.sort(sut.positionSort());
       expect(teams).toEqual([teamA, teamA2]);
+    });
+
+    it("should reverse the order if the attribute reverse of a tie break is set to true", () => {
+      const counterGoalsTieBreak = new CustomTieBreaker(
+        (team1, team2) => [team1.counterGoals, team2.counterGoals],
+        true,
+      );
+
+      const { sut } = createSut([counterGoalsTieBreak]);
+      const teamA = { name: "A", points: 3, counterGoals: 2 } as RoundRobinTeam;
+      const teamB = { name: "B", points: 3, counterGoals: 1 } as RoundRobinTeam;
+
+      const teams = [teamA, teamB];
+
+      teams.sort(sut.positionSort());
+      expect(teams).toEqual([teamB, teamA]);
     });
   });
 });
