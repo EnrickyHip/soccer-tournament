@@ -2,6 +2,10 @@ import { Match } from "../Match";
 import Team from "../Team";
 import { Result } from "../types";
 
+/**
+ * Create a Team for a Round Robin Tournament.
+ */
+
 export class RoundRobinTeam extends Team {
   public wins = 0;
   public draws = 0;
@@ -23,10 +27,12 @@ export class RoundRobinTeam extends Team {
     return (this.points * 100) / (this.matchesPlayed * 3);
   }
 
+  //TODO faz um argumento pra alterar o número de partidas retornadas
   public get lastMatches(): Match[] {
     return this.matchesPlayedArray.slice(-5);
   }
 
+  //TODO faz um argumento pra alterar o número de partidas retornadas
   public get lastResults(): Result[] {
     return this.lastMatches.map((match) => {
       const [selfScore, otherScore] = match.getTeamScore(this);
@@ -41,10 +47,22 @@ export class RoundRobinTeam extends Team {
     return this._position;
   }
 
-  //* esse método não é recomendado o uso na lib
+  /**
+   * Set the position of the team.
+   * @package
+   * @param position the position to set.
+   *
+   * We do not recommend to change the team position this way.
+   */
   public setPosition(position: number) {
     this._position = position;
   }
+
+  /**
+   * This method is used internaly to calculate total wins, draws, losses, goals and counter goals.
+   * @returns The team total points.
+   * If you want the team's total points, it's recommended to use `team.points`.
+   */
 
   public calculatePoints() {
     this.resetValues();

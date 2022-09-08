@@ -11,6 +11,7 @@
   "homepage": "https://github.com/EnrickyHip/soccer-tournament",
   "scripts": {
     "test": "jest --watchAll --noStackTrace",
+    "test:once": "jest--noStackTrace",
     "test:silent": "jest --watchAll --silent --noStackTrace",
     "test:coverage": "jest --coverage --silent --noStackTrace"
   },
