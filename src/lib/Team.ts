@@ -26,14 +26,13 @@ abstract class Team {
   }
 
   public goalsInMatches(matches: Match[]): number {
-    try {
-      return matches.reduce((goals: number, match) => {
-        const [selfScore] = match.getTeamScore(this);
-        return goals + selfScore;
-      }, 0);
-    } catch (error) {
-      throw new Error("This team doest not belong to some match which was passed was an argument");
-    }
+    return matches.reduce((goals: number, match) => {
+      if (match.homeTeam !== this && match.awayTeam !== this) {
+        throw new Error("This team doest not belong to some match which was passed as an argument");
+      }
+      const [selfScore] = match.getTeamScore(this);
+      return goals + selfScore;
+    }, 0);
   }
 
   //* esse método não é recomendado o uso na lib

@@ -27,24 +27,48 @@ export class RoundRobinTeam extends Team {
     return (this.points * 100) / (this.matchesPlayed * 3);
   }
 
-  //TODO faz um argumento pra alterar o número de partidas retornadas
-  public get lastMatches(): Match[] {
-    return this.matchesPlayedArray.slice(-5);
+  public get position() {
+    return this._position;
   }
 
-  //TODO faz um argumento pra alterar o número de partidas retornadas
-  public get lastResults(): Result[] {
-    return this.lastMatches.map((match) => {
-      const [selfScore, otherScore] = match.getTeamScore(this);
+  /**
+   * Get the last played matches of the team.
+   * @param total - Number of matches you want to return. The default value is 5.
+   * @returns An Array cointaning the matches objects.
+   */
 
-      if (selfScore > otherScore) return "win";
-      if (otherScore > selfScore) return "lose";
-      return "draw";
+  public getLastMatches(total = 5): Match[] {
+    return this.matchesPlayedArray.slice(-total);
+  }
+
+  /**
+   * Get the result of the last played matches of the team. The possible results are "win", "draw", and "lose".
+   * @param total
+   * @returns
+   */
+
+  public getLastResults(total = 5): Result[] {
+    return this.getLastMatches(total).map((match) => {
+      return this.getResult(match) as Result;
     });
   }
 
-  public get position() {
-    return this._position;
+  /**
+   * Get the result of a sent match.
+   * @param match - The match to get the result.
+   * @returns The possible returns are the strings: "win", "draw" or "lose". If the match was not played yet, it returns `null`.
+   */
+
+  public getResult(match: Match): Result | null {
+    if (match.homeTeam !== this && match.awayTeam !== this) {
+      throw new Error("This team does not belongs to the sent match.");
+    }
+
+    if (!match.isPlayed) return null;
+    const [selfScore, otherScore] = match.getTeamScore(this);
+    if (selfScore > otherScore) return "win";
+    if (otherScore > selfScore) return "lose";
+    return "draw";
   }
 
   /**

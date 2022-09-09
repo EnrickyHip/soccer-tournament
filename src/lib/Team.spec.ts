@@ -115,7 +115,7 @@ describe("Team", () => {
       const matches = [match1, match2];
 
       expect(() => sut.goalsInMatches(matches)).toThrow(
-        "This team doest not belong to some match which was passed was an argument",
+        "This team doest not belong to some match which was passed as an argument",
       );
     });
 
