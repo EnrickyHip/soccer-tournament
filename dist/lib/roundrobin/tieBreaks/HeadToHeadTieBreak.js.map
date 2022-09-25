@@ -1,1 +1,0 @@
-{"version":3,"file":"HeadToHeadTieBreak.js","sourceRoot":"","sources":["../../../../src/lib/roundrobin/tieBreaks/HeadToHeadTieBreak.ts"],"names":[],"mappings":";;;AAAA,uCAAoC;AAIpC,MAAa,kBAAkB;IAA/B;QACS,YAAO,GAAG,KAAK,CAAC;QAChB,kBAAa,GAA0B,CAAC,KAAK,EAAE,KAAK,EAAE,EAAE;YAC7D,OAAO,aAAK,CAAC,eAAe,CAAC,KAAK,EAAE,KAAK,CAAC,CAAC;QAC7C,CAAC,CAAC;IACJ,CAAC;CAAA;AALD,gDAKC"}

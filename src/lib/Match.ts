@@ -19,7 +19,7 @@ export abstract class Match {
 
   public abstract play(homeGoals: Goal, awayGoals: Goal): void;
 
-  public getTeamScore(team: Team): number[] {
+  public getTeamScore(team: Team): [number, number] {
     if (team !== this.homeTeam && team !== this.awayTeam) {
       throw new Error("Team passed as an argument does not belongs to this match");
     }
@@ -30,7 +30,7 @@ export abstract class Match {
     return [selfScore, otherScore];
   }
 
-  public static getMatchesBetween(team1: Team, team2: Team): Match[] {
+  public static getMatchesBetween<MatchType extends Match>(team1: Team<MatchType>, team2: Team<MatchType>) {
     return team1.matches.filter((match) => {
       const { homeTeam, awayTeam } = match;
       return (homeTeam === team1 && awayTeam === team2) || (homeTeam === team2 && awayTeam === team1);

@@ -3,8 +3,8 @@ import { RoundRobinTeam } from "../roundrobin";
 import Team from "../Team";
 import { Goal, SortableAttribute, TieBreakGetAttributes } from "./types";
 
-export interface MatchesObject {
-  [id: number]: Match;
+export interface MatchesObject<MatchType extends Match> {
+  [id: number]: MatchType;
 }
 
 export interface TieBreak {
@@ -39,8 +39,5 @@ export interface ClassificationProtocol {
 export interface SortProtocol {
   currentAttribute: SortableAttribute;
   positionSort(): (team1: RoundRobinTeam, team2: RoundRobinTeam) => number;
-  customSort(
-    attribute?: SortableAttribute,
-    reverse?: boolean,
-  ): (team1: RoundRobinTeam, team2: RoundRobinTeam) => number;
+  customSort(attribute?: SortableAttribute, reverse?: boolean): (team1: RoundRobinTeam, team2: RoundRobinTeam) => number;
 }

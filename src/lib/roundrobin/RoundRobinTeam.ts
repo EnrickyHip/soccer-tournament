@@ -1,12 +1,12 @@
-import { Match } from "../Match";
 import Team from "../Team";
 import { Result } from "../types";
+import { RoundRobinMatch } from "./RoundRobinMatch";
 
 /**
  * Create a Team for a Round Robin Tournament.
  */
 
-export class RoundRobinTeam extends Team {
+export class RoundRobinTeam extends Team<RoundRobinMatch> {
   public wins = 0;
   public draws = 0;
   public losses = 0;
@@ -14,15 +14,15 @@ export class RoundRobinTeam extends Team {
   public counterGoals = 0;
   private _position = 0;
 
-  public get points(): number {
+  public get points() {
     return this.wins * 3 + this.draws;
   }
 
-  public get goalDifference(): number {
+  public get goalDifference() {
     return this.goals - this.counterGoals;
   }
 
-  public get percentage(): number {
+  public get percentage() {
     if (this.points === 0) return 0;
     return (this.points * 100) / (this.matchesPlayed * 3);
   }
@@ -37,14 +37,14 @@ export class RoundRobinTeam extends Team {
    * @returns An Array cointaning the matches objects.
    */
 
-  public getLastMatches(total = 5): Match[] {
+  public getLastMatches(total = 5): RoundRobinMatch[] {
     return this.matchesPlayedArray.slice(-total);
   }
 
   /**
    * Get the result of the last played matches of the team. The possible results are "win", "draw", and "lose".
-   * @param total
-   * @returns
+   * @param total The total results you want to get. The default values is 5.
+   * @returns An array of the last results of the team.
    */
 
   public getLastResults(total = 5): Result[] {
@@ -59,16 +59,16 @@ export class RoundRobinTeam extends Team {
    * @returns The possible returns are the strings: "win", "draw" or "lose". If the match was not played yet, it returns `null`.
    */
 
-  public getResult(match: Match): Result | null {
+  public getResult(match: RoundRobinMatch): Result | null {
     if (match.homeTeam !== this && match.awayTeam !== this) {
       throw new Error("This team does not belongs to the sent match.");
     }
 
     if (!match.isPlayed) return null;
     const [selfScore, otherScore] = match.getTeamScore(this);
-    if (selfScore > otherScore) return "win";
-    if (otherScore > selfScore) return "lose";
-    return "draw";
+    if (selfScore > otherScore) return Result.win;
+    if (otherScore > selfScore) return Result.lose;
+    return Result.draw;
   }
 
   /**
@@ -88,16 +88,16 @@ export class RoundRobinTeam extends Team {
    * If you want the team's total points, it's recommended to use `team.points`.
    */
 
-  public calculatePoints() {
+  public calculatePoints(): number {
     this.resetValues();
-    this.matchesPlayedArray.forEach((match: Match) => {
+    this.matchesPlayedArray.forEach((match) => {
       this.calculateMatch(match);
     });
 
     return this.points;
   }
 
-  private calculateMatch(match: Match): void {
+  private calculateMatch(match: RoundRobinMatch): void {
     const [selfScore, otherScore] = match.getTeamScore(this);
 
     this.goals += selfScore;

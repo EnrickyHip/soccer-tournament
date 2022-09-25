@@ -1,5 +1,5 @@
-import { Match } from "../Match";
 import { RoundRobinTeam } from "../roundrobin";
+import { RoundRobinMatch } from "../roundrobin/RoundRobinMatch";
 
 /* criará um novo tipo com todas as chaves que forem do tipo passado como parâmetro
 [Key in keyof Object] -> faz uma iteração entre todas as chaves do objeto
@@ -11,8 +11,13 @@ type KeysType<Obj, Type> = {
   [Key in keyof Obj]: Obj[Key] extends Type ? Key : never;
 }[keyof Obj];
 
-export type Round = Match[];
+export type Round = RoundRobinMatch[];
 export type Goal = number | null;
-export type Result = "win" | "draw" | "lose";
 export type SortableAttribute = KeysType<RoundRobinTeam, number>;
 export type TieBreakGetAttributes = (team1: RoundRobinTeam, team2: RoundRobinTeam) => [number, number];
+
+export enum Result {
+  win = "win",
+  draw = "draw",
+  lose = "lose",
+}
