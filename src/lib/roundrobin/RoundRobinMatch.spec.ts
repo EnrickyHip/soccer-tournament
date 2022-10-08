@@ -6,7 +6,7 @@ const createSut = () => {
   const tournamentMock = new RoundRobinTournament([], false, {}, []);
   const team1 = new RoundRobinTeam("team1", "", 1);
   const team2 = new RoundRobinTeam("team2", "", 2);
-  const sut = RoundRobinMatch.create([team1, team2], 1, tournamentMock);
+  const sut = RoundRobinMatch.create(team1, team2, 1, tournamentMock);
   return { sut, team1, team2, tournament: tournamentMock };
 };
 
@@ -23,7 +23,7 @@ describe("RoundRobinMatch", () => {
       const spyTeam1 = jest.spyOn(team1, "addMatch");
       const spyTeam2 = jest.spyOn(team2, "addMatch");
 
-      const sut = RoundRobinMatch.create([team1, team2], 2, tournament);
+      const sut = RoundRobinMatch.create(team1, team2, 2, tournament);
 
       expect(spyTeam1).toBeCalledWith(sut);
       expect(spyTeam2).toBeCalledWith(sut);

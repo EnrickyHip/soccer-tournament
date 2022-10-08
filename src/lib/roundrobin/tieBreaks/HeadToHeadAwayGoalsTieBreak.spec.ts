@@ -39,11 +39,11 @@ describe("HeadToHeadAwayGoalsTieBreak", () => {
       const team3 = new RoundRobinTeam("team3", "", 3);
       const tournamentMock = new RoundRobinTournament([], false, {}, []);
 
-      const match1 = RoundRobinMatch.create([team1, team2], 1, tournamentMock);
-      const match2 = RoundRobinMatch.create([team2, team1], 2, tournamentMock);
-      const match3 = RoundRobinMatch.create([team2, team3], 3, tournamentMock);
-      const match4 = RoundRobinMatch.create([team3, team1], 4, tournamentMock);
-      const match5 = RoundRobinMatch.create([team2, team1], 5, tournamentMock);
+      const match1 = RoundRobinMatch.create(team1, team2, 1, tournamentMock);
+      const match2 = RoundRobinMatch.create(team2, team1, 2, tournamentMock);
+      const match3 = RoundRobinMatch.create(team2, team3, 3, tournamentMock);
+      const match4 = RoundRobinMatch.create(team3, team1, 4, tournamentMock);
+      const match5 = RoundRobinMatch.create(team2, team1, 5, tournamentMock);
 
       match1.play(2, 3);
       match2.play(2, 1);
@@ -59,8 +59,8 @@ describe("HeadToHeadAwayGoalsTieBreak", () => {
     it("should not count if the match is not played", () => {
       const { sut, team1, team2 } = createSut();
       const tournamentMock = new RoundRobinTournament([], false, {}, []);
-      RoundRobinMatch.create([team1, team2], 1, tournamentMock);
-      RoundRobinMatch.create([team2, team1], 2, tournamentMock);
+      RoundRobinMatch.create(team1, team2, 1, tournamentMock);
+      RoundRobinMatch.create(team2, team1, 2, tournamentMock);
 
       expect(sut.getAttributes(team1, team2)).toEqual([0, 0]);
     });
