@@ -37,14 +37,16 @@ export class RoundRobinMatch extends Match {
     this.tournament.sortTeams();
   }
 
-  public static create(teams: RoundRobinTeam[], id: number, tournament: RoundRobinTournament): RoundRobinMatch {
-    const visitingTeam = teams[1];
-    const homeTeam = teams[0];
-
-    const match = new RoundRobinMatch(homeTeam, visitingTeam, id, tournament);
+  public static create(
+    homeTeam: RoundRobinTeam,
+    awayTeam: RoundRobinTeam,
+    id: number,
+    tournament: RoundRobinTournament,
+  ): RoundRobinMatch {
+    const match = new RoundRobinMatch(homeTeam, awayTeam, id, tournament);
 
     homeTeam.addMatch(match);
-    visitingTeam.addMatch(match);
+    awayTeam.addMatch(match);
 
     return match;
   }

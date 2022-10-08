@@ -30,6 +30,7 @@ export abstract class Match {
     return [selfScore, otherScore];
   }
 
+  //* essa função está acessível em RoundRobinMatch também...
   public static getMatchesBetween<MatchType extends Match>(team1: Team<MatchType>, team2: Team<MatchType>) {
     return team1.matches.filter((match) => {
       const { homeTeam, awayTeam } = match;

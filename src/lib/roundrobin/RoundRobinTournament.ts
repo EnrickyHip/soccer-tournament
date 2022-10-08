@@ -38,7 +38,7 @@ export class RoundRobinTournament implements Tournament {
     return rounds.map((round: RoundRobinTeam[][]) => {
       return round.map((teams: RoundRobinTeam[]) => {
         const id = this.matches.length;
-        const newMatch = RoundRobinMatch.create(teams, id, this);
+        const newMatch = RoundRobinMatch.create(teams[0], teams[1], id, this);
         this.matches.push(newMatch);
         return newMatch;
       });
