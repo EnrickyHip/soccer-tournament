@@ -19,6 +19,7 @@ class Match {
         const otherScore = this.homeTeam === team ? awayTeamGoals : homeTeamGoals;
         return [selfScore, otherScore];
     }
+    //* essa função está acessível em RoundRobinMatch também...
     static getMatchesBetween(team1, team2) {
         return team1.matches.filter((match) => {
             const { homeTeam, awayTeam } = match;

@@ -23,12 +23,10 @@ class RoundRobinMatch extends Match_1.Match {
         this.awayTeam.calculatePoints();
         this.tournament.sortTeams();
     }
-    static create(teams, id, tournament) {
-        const visitingTeam = teams[1];
-        const homeTeam = teams[0];
-        const match = new RoundRobinMatch(homeTeam, visitingTeam, id, tournament);
+    static create(homeTeam, awayTeam, id, tournament) {
+        const match = new RoundRobinMatch(homeTeam, awayTeam, id, tournament);
         homeTeam.addMatch(match);
-        visitingTeam.addMatch(match);
+        awayTeam.addMatch(match);
         return match;
     }
 }

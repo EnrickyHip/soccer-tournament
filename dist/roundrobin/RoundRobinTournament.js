@@ -26,7 +26,7 @@ class RoundRobinTournament {
         return rounds.map((round) => {
             return round.map((teams) => {
                 const id = this.matches.length;
-                const newMatch = RoundRobinMatch_1.RoundRobinMatch.create(teams, id, this);
+                const newMatch = RoundRobinMatch_1.RoundRobinMatch.create(teams[0], teams[1], id, this);
                 this.matches.push(newMatch);
                 return newMatch;
             });

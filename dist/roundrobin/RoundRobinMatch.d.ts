@@ -9,5 +9,5 @@ export declare class RoundRobinMatch extends Match {
     protected readonly tournament: RoundRobinTournament;
     private constructor();
     play(homeGoals: Goal, awayGoals: Goal): void;
-    static create(teams: RoundRobinTeam[], id: number, tournament: RoundRobinTournament): RoundRobinMatch;
+    static create(homeTeam: RoundRobinTeam, awayTeam: RoundRobinTeam, id: number, tournament: RoundRobinTournament): RoundRobinMatch;
 }
