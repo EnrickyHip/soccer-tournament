@@ -1,6 +1,5 @@
-import Classification from "./Classification";
-import { RoundRobinTeam } from "./RoundRobinTeam";
-import { RoundRobinTournament } from "./RoundRobinTournament";
+import { RoundRobinTeam, RoundRobinTournament } from "../../lib/roundrobin";
+import Classification from "../../lib/roundrobin/Classification";
 
 describe("RoundRobinTournament", () => {
   afterEach(() => jest.clearAllMocks);

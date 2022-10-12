@@ -1,7 +1,6 @@
-import { TieBreak } from "../types/interfaces";
-import RoundRobinSort from "./RoundRobinSort";
-import { RoundRobinTeam } from "./RoundRobinTeam";
-import { CustomTieBreak, tieBreaks } from "./tieBreaks";
+import { CustomTieBreak, RoundRobinTeam, tieBreaks } from "../../lib/roundrobin";
+import RoundRobinSort from "../../lib/roundrobin/RoundRobinSort";
+import { TieBreak } from "../../lib/types/interfaces";
 
 describe("RoundRobinSort", () => {
   const createSut = (tiebreaks: TieBreak[]) => {

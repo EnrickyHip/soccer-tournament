@@ -1,6 +1,6 @@
-import { SortableAttribute } from "../../types";
-import { RoundRobinTeam } from "../RoundRobinTeam";
-import { AttributeTieBreak } from "./AttributeTieBreak";
+import { SortableAttribute } from "../../lib/types";
+import { RoundRobinTeam } from "../../lib/roundrobin/RoundRobinTeam";
+import { AttributeTieBreak } from "../../lib/roundrobin/tieBreaks/AttributeTieBreak";
 
 describe("AttributeTieBreak", () => {
   const createSut = (attribute: SortableAttribute, reverse = false) => {

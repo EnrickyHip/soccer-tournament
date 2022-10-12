@@ -1,8 +1,6 @@
-import { Match } from "../../Match";
-import { RoundRobinMatch } from "../RoundRobinMatch";
-import { RoundRobinTeam } from "../RoundRobinTeam";
-import { RoundRobinTournament } from "../RoundRobinTournament";
-import { HeadToHeadAwayGoalsTieBreak } from "./HeadToHeadAwayGoalsTieBreak";
+import { Match } from "../../../lib/Match";
+import { RoundRobinMatch, RoundRobinTeam, RoundRobinTournament } from "../../../lib/roundrobin";
+import { HeadToHeadAwayGoalsTieBreak } from "../../../lib/roundrobin/tieBreaks/HeadToHeadAwayGoalsTieBreak";
 
 describe("HeadToHeadAwayGoalsTieBreak", () => {
   const createSut = () => {

@@ -1,6 +1,6 @@
-import { ClassificationOptions } from "../types/interfaces";
-import Classification from "./Classification";
-import { RoundRobinTeam } from "./RoundRobinTeam";
+import { RoundRobinTeam } from "../../lib/roundrobin";
+import Classification from "../../lib/roundrobin/Classification";
+import { ClassificationOptions } from "../../lib/types";
 
 const classification = {
   classified1: { min: 2, max: 4 },

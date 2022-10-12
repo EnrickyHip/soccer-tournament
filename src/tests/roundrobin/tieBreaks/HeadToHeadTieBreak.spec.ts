@@ -1,6 +1,6 @@
-import { Match } from "../../Match";
-import { RoundRobinTeam } from "../RoundRobinTeam";
-import { HeadToHeadTieBreak } from "./HeadToHeadTieBreak";
+import { Match } from "../../../lib/Match";
+import { RoundRobinTeam } from "../../../lib/roundrobin";
+import { HeadToHeadTieBreak } from "../../../lib/roundrobin/tieBreaks/HeadToHeadTieBreak";
 
 describe("HeadToHeadTieBreak", () => {
   const createSut = () => {

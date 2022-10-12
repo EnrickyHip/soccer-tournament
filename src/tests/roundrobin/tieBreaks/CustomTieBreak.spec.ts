@@ -1,5 +1,4 @@
-import { RoundRobinTeam } from "../RoundRobinTeam";
-import { CustomTieBreak } from "./CustomTieBreak";
+import { CustomTieBreak, RoundRobinTeam } from "../../../lib/roundrobin";
 
 describe("CustomTieBreak", () => {
   const customMethod = (team1: RoundRobinTeam, team2: RoundRobinTeam): [number, number] => {

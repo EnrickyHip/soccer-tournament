@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Match } from "./Match";
-import Team from "./Team";
-import { Goal } from "./types";
+import { Match } from "../lib/Match";
+import Team from "../lib/Team";
+import { Goal } from "../lib/types";
 
 class MatchMock extends Match {
   play(homeGoals: Goal, awayGoals: Goal): void {
