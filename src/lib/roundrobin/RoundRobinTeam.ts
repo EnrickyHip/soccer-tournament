@@ -12,7 +12,7 @@ export class RoundRobinTeam extends Team<RoundRobinMatch> {
   public losses = 0;
   public goals = 0;
   public counterGoals = 0;
-  private _position = 0;
+  public position = 0;
 
   public get points() {
     return this.wins * 3 + this.draws;
@@ -25,10 +25,6 @@ export class RoundRobinTeam extends Team<RoundRobinMatch> {
   public get percentage() {
     if (this.points === 0) return 0;
     return (this.points * 100) / (this.matchesPlayed * 3);
-  }
-
-  public get position() {
-    return this._position;
   }
 
   /**
@@ -69,17 +65,6 @@ export class RoundRobinTeam extends Team<RoundRobinMatch> {
     if (selfScore > otherScore) return Result.win;
     if (otherScore > selfScore) return Result.lose;
     return Result.draw;
-  }
-
-  /**
-   * Set the position of the team.
-   * @package
-   * @param position the position to set.
-   *
-   * We do not recommend to change the team position this way.
-   */
-  public setPosition(position: number) {
-    this._position = position;
   }
 
   /**

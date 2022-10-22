@@ -12,7 +12,7 @@ class Classification implements ClassificationProtocol {
     return this.classification;
   }
 
-  public getTeamClassification(team: RoundRobinTeam): string | null {
+  public getTeamClassification(team: RoundRobinTeam) {
     const { position } = team;
     if (position === 1) return "first";
 

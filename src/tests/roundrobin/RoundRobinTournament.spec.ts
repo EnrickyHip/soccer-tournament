@@ -59,20 +59,6 @@ describe("RoundRobinTournament", () => {
       expect(spy).toBeCalledTimes(1);
     });
 
-    it("should set teams position", () => {
-      const { sut, teams } = createSut(false);
-      const spy = jest.spyOn(teams[0], "setPosition");
-      const spy2 = jest.spyOn(teams[1], "setPosition");
-      const spy3 = jest.spyOn(teams[2], "setPosition");
-      const spy4 = jest.spyOn(teams[3], "setPosition");
-      sut.sortTeams();
-
-      expect(spy).toBeCalledTimes(1);
-      expect(spy2).toBeCalledTimes(1);
-      expect(spy3).toBeCalledTimes(1);
-      expect(spy4).toBeCalledTimes(1);
-    });
-
     it("should call customSort if some attribute is sent", () => {
       const { sut } = createSut(false);
       const spy = jest.spyOn(sut["sort"], "customSort");

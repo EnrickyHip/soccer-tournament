@@ -29,50 +29,50 @@ describe("Classification", () => {
   describe("getTeamClassification", () => {
     it("should return 'first'", () => {
       const { sut, team } = createSut(classification);
-      team.setPosition(1);
+      team.position = 1;
       expect(sut.getTeamClassification(team)).toBe("first");
     });
 
     it("should return 'classified1'", () => {
       const { sut, team } = createSut(classification);
 
-      team.setPosition(1);
+      team.position = 1;
       expect(sut.getTeamClassification(team)).not.toBe("classified1");
-      team.setPosition(2);
+      team.position = 2;
       expect(sut.getTeamClassification(team)).toBe("classified1");
-      team.setPosition(3);
+      team.position = 3;
       expect(sut.getTeamClassification(team)).toBe("classified1");
-      team.setPosition(4);
+      team.position = 4;
       expect(sut.getTeamClassification(team)).toBe("classified1");
-      team.setPosition(5);
+      team.position = 5;
       expect(sut.getTeamClassification(team)).not.toBe("classified1");
     });
 
     it("should return 'relegated'", () => {
       const { sut, team } = createSut(classification);
 
-      team.setPosition(17);
+      team.position = 17;
       expect(sut.getTeamClassification(team)).not.toBe("relegated");
-      team.setPosition(18);
+      team.position = 18;
       expect(sut.getTeamClassification(team)).toBe("relegated");
-      team.setPosition(19);
+      team.position = 19;
       expect(sut.getTeamClassification(team)).toBe("relegated");
-      team.setPosition(20);
+      team.position = 20;
       expect(sut.getTeamClassification(team)).toBe("relegated");
-      team.setPosition(21);
+      team.position = 21;
       expect(sut.getTeamClassification(team)).not.toBe("relegated");
     });
 
     it("should return null", () => {
       const { sut, team } = createSut(classification);
 
-      team.setPosition(4);
+      team.position = 4;
       expect(sut.getTeamClassification(team)).not.toBeNull();
-      team.setPosition(5);
+      team.position = 5;
       expect(sut.getTeamClassification(team)).toBeNull();
-      team.setPosition(17);
+      team.position = 17;
       expect(sut.getTeamClassification(team)).toBeNull();
-      team.setPosition(18);
+      team.position = 18;
       expect(sut.getTeamClassification(team)).not.toBeNull();
     });
   });

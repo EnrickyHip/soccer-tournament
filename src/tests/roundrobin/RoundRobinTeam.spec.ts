@@ -54,7 +54,7 @@ describe("RoundRobinTeam", () => {
 
   it("should set position", () => {
     const sut = createSut();
-    sut.setPosition(10);
+    sut.position = 10;
     expect(sut.position).toBe(10);
   });
 
