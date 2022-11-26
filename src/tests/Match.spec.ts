@@ -4,9 +4,8 @@ import Team from "../lib/Team";
 import { Goal } from "../lib/types";
 
 class MatchMock extends Match {
-  play(homeGoals: Goal, awayGoals: Goal): void {
-    this.score.homeTeam = homeGoals;
-    this.score.awayTeam = awayGoals;
+  protected afterPlay(): void {
+    //
   }
 }
 

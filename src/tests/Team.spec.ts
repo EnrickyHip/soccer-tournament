@@ -4,17 +4,16 @@ import Team from "../lib/Team";
 import { Goal } from "../lib/types";
 
 class MatchMock extends Match {
-  play(homeGoals: Goal, awayGoals: Goal): void {
-    this.score.homeTeam = homeGoals;
-    this.score.awayTeam = awayGoals;
-  }
-
   static create(homeTeam: Team, awayTeam: Team, id: number) {
     const match = new MatchMock(homeTeam, awayTeam, id);
     homeTeam.addMatch(match);
     awayTeam.addMatch(match);
 
     return match;
+  }
+
+  protected afterPlay(): void {
+    //
   }
 }
 
@@ -51,7 +50,7 @@ describe("Team", () => {
       const match1 = MatchMock.create(sut, team2, 1);
       const match2 = MatchMock.create(sut, team2, 2);
 
-      match1.isPlayed = true;
+      match1.play(1, 1);
 
       expect(sut.matches).toHaveLength(2);
       expect(sut.matches).toEqual([match1, match2]);
@@ -71,7 +70,7 @@ describe("Team", () => {
       MatchMock.create(sut, team2, 1);
       const match2 = MatchMock.create(sut, team2, 2);
 
-      match2.isPlayed = true;
+      match2.play(1, 1);
 
       expect(sut.matchesPlayedArray).toHaveLength(1);
       expect(sut.matchesPlayedArray).toEqual([match2]);
@@ -97,9 +96,9 @@ describe("Team", () => {
       const match2 = MatchMock.create(sut, team2, 2);
 
       expect(sut.matchesPlayed).toBe(0);
-      match1.isPlayed = true;
+      match1.play(1, 1);
       expect(sut.matchesPlayed).toBe(1);
-      match2.isPlayed = true;
+      match2.play(1, 1);
       expect(sut.matchesPlayed).toBe(2);
     });
   });

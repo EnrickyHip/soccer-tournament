@@ -6,8 +6,8 @@ export abstract class Match {
   public readonly id: number;
   public readonly homeTeam: Team;
   public readonly awayTeam: Team;
-  public isPlayed = false;
-  public score: Score = { homeTeam: null, awayTeam: null };
+  protected _isPlayed = false;
+  public readonly score: Score = { homeTeam: null, awayTeam: null };
 
   constructor(homeTeam: Team, awayTeam: Team, id: number) {
     this.id = id;
@@ -15,7 +15,28 @@ export abstract class Match {
     this.awayTeam = awayTeam;
   }
 
-  public abstract play(homeGoals: Goal, awayGoals: Goal): void;
+  public get isPlayed(): boolean {
+    return this._isPlayed;
+  }
+
+  protected set isPlayed(value: boolean) {
+    this._isPlayed = value;
+  }
+
+  protected abstract afterPlay(): void;
+
+  public play(homeGoals: Goal, awayGoals: Goal): void {
+    this.score.homeTeam = homeGoals;
+    this.score.awayTeam = awayGoals;
+
+    if (homeGoals === null || awayGoals === null) {
+      this._isPlayed = false;
+    } else {
+      this._isPlayed = true;
+    }
+
+    this.afterPlay();
+  }
 
   public getTeamScore(team: Team): [number, number] {
     if (team !== this.homeTeam && team !== this.awayTeam) {

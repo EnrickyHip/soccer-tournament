@@ -1,5 +1,4 @@
 import { Match } from "../Match";
-import { Goal } from "../types";
 import { RoundRobinTeam } from "./RoundRobinTeam";
 import { RoundRobinTournament } from "./RoundRobinTournament";
 
@@ -22,16 +21,7 @@ export class RoundRobinMatch extends Match {
     this.tournament = tournament;
   }
 
-  public play(homeGoals: Goal, awayGoals: Goal): void {
-    this.score.homeTeam = homeGoals;
-    this.score.awayTeam = awayGoals;
-
-    if (homeGoals === null || awayGoals === null) {
-      this.isPlayed = false;
-    } else {
-      this.isPlayed = true;
-    }
-
+  protected afterPlay() {
     this.homeTeam.calculatePoints();
     this.awayTeam.calculatePoints();
     this.tournament.sortTeams();
