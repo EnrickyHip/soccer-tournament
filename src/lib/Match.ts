@@ -19,10 +19,6 @@ export abstract class Match {
     return this._isPlayed;
   }
 
-  protected set isPlayed(value: boolean) {
-    this._isPlayed = value;
-  }
-
   protected abstract afterPlay(): void;
 
   public play(homeGoals: Goal, awayGoals: Goal): void {
