@@ -7,22 +7,42 @@ import { RoundRobinMatch } from "./RoundRobinMatch";
  */
 
 export class RoundRobinTeam extends Team<RoundRobinMatch> {
-  public wins = 0;
-  public draws = 0;
-  public losses = 0;
-  public goals = 0;
-  public counterGoals = 0;
+  private _wins = 0;
+  private _draws = 0;
+  private _losses = 0;
+  private _goals = 0;
+  private _counterGoals = 0;
   public position = 0;
 
-  public get points() {
-    return this.wins * 3 + this.draws;
+  public get wins(): number {
+    return this._wins;
   }
 
-  public get goalDifference() {
-    return this.goals - this.counterGoals;
+  public get draws(): number {
+    return this._draws;
   }
 
-  public get percentage() {
+  public get losses(): number {
+    return this._losses;
+  }
+
+  public get goals(): number {
+    return this._goals;
+  }
+
+  public get counterGoals(): number {
+    return this._counterGoals;
+  }
+
+  public get points(): number {
+    return this._wins * 3 + this._draws;
+  }
+
+  public get goalDifference(): number {
+    return this._goals - this._counterGoals;
+  }
+
+  public get percentage(): number {
     if (this.points === 0) return 0;
     return (this.points * 100) / (this.matchesPlayed * 3);
   }
@@ -85,23 +105,23 @@ export class RoundRobinTeam extends Team<RoundRobinMatch> {
   private calculateMatch(match: RoundRobinMatch): void {
     const [selfScore, otherScore] = match.getTeamScore(this);
 
-    this.goals += selfScore;
-    this.counterGoals += otherScore;
+    this._goals += selfScore;
+    this._counterGoals += otherScore;
 
     if (selfScore > otherScore) {
-      this.wins += 1;
+      this._wins += 1;
     } else if (otherScore > selfScore) {
-      this.losses += 1;
+      this._losses += 1;
     } else {
-      this.draws += 1;
+      this._draws += 1;
     }
   }
 
   private resetValues(): void {
-    this.goals = 0;
-    this.counterGoals = 0;
-    this.wins = 0;
-    this.draws = 0;
-    this.losses = 0;
+    this._goals = 0;
+    this._counterGoals = 0;
+    this._wins = 0;
+    this._draws = 0;
+    this._losses = 0;
   }
 }

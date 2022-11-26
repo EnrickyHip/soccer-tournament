@@ -35,8 +35,8 @@ describe("RoundRobinTeam", () => {
 
     it("should calculate goal difference", () => {
       const sut = createSut();
-      sut.goals = 4;
-      sut.counterGoals = 1;
+      const { match } = createMatch(sut, 1);
+      match.play(4, 1);
 
       expect(sut.goalDifference).toBe(3);
     });
@@ -75,6 +75,61 @@ describe("RoundRobinTeam", () => {
       match3.play(1, 1);
       expect(sut.points).toBe(4);
       expect(sut.calculatePoints()).toBe(sut.points);
+    });
+
+    it("should calculate wins draws and losses", () => {
+      const sut = createSut();
+      const { match } = createMatch(sut, 1);
+      const { match: match2 } = createMatch(sut, 2);
+      const { match: match3 } = createMatch(sut, 3);
+      const { match: match4 } = createMatch(sut, 4);
+
+      expect(sut.wins).toBe(0);
+      expect(sut.draws).toBe(0);
+      expect(sut.losses).toBe(0);
+
+      match.play(2, 1);
+
+      expect(sut.wins).toBe(1);
+      expect(sut.draws).toBe(0);
+      expect(sut.losses).toBe(0);
+
+      match2.play(0, 1);
+
+      expect(sut.wins).toBe(1);
+      expect(sut.draws).toBe(0);
+      expect(sut.losses).toBe(1);
+
+      match3.play(3, 1);
+
+      expect(sut.wins).toBe(2);
+      expect(sut.draws).toBe(0);
+      expect(sut.losses).toBe(1);
+
+      match4.play(3, 3);
+
+      expect(sut.wins).toBe(2);
+      expect(sut.draws).toBe(1);
+      expect(sut.losses).toBe(1);
+    });
+
+    it("should calculate goals and counter goals", () => {
+      const sut = createSut();
+      const { match } = createMatch(sut, 1);
+      const { match: match2 } = createMatch(sut, 2);
+      const { match: match3 } = createMatch(sut, 3);
+
+      expect(sut.goals).toBe(0);
+      expect(sut.counterGoals).toBe(0);
+      match.play(2, 1);
+      expect(sut.goals).toBe(2);
+      expect(sut.counterGoals).toBe(1);
+      match2.play(0, 1);
+      expect(sut.goals).toBe(2);
+      expect(sut.counterGoals).toBe(2);
+      match3.play(1, 1);
+      expect(sut.goals).toBe(3);
+      expect(sut.counterGoals).toBe(3);
     });
   });
 

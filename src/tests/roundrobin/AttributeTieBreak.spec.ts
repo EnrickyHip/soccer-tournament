@@ -4,10 +4,8 @@ import { AttributeTieBreak } from "../../lib/roundrobin/tieBreaks/AttributeTieBr
 
 describe("AttributeTieBreak", () => {
   const createSut = (attribute: SortableAttribute, reverse = false) => {
-    const team1 = new RoundRobinTeam("team1", "", 1);
-    const team2 = new RoundRobinTeam("team2", "", 2);
     const sut = new AttributeTieBreak(attribute, reverse);
-    return { sut, team1, team2 };
+    return { sut };
   };
 
   describe("attributes", () => {
@@ -30,10 +28,9 @@ describe("AttributeTieBreak", () => {
 
   describe("getAttributes", () => {
     it("should return each team attribute", () => {
-      const { sut, team1, team2 } = createSut("goals");
-
-      team1.goals = 2;
-      team2.goals = 3;
+      const { sut } = createSut("goals");
+      const team1 = { goals: 2 } as RoundRobinTeam;
+      const team2 = { goals: 3 } as RoundRobinTeam;
 
       const attributes = sut.getAttributes(team1, team2);
       expect(attributes).toEqual([team1.goals, team2.goals]);

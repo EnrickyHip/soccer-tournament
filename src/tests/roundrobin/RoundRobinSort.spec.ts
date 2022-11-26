@@ -40,16 +40,13 @@ describe("RoundRobinSort", () => {
     it("should sort teams by attributes", () => {
       const { sut } = createSut([]);
 
-      const teamA = { goals: 2 } as RoundRobinTeam;
-      const teamB = { goals: 4 } as RoundRobinTeam;
-      const teamC = { goals: 0 } as RoundRobinTeam;
+      const teamA = { goals: 2, wins: 1 } as RoundRobinTeam;
+      const teamB = { goals: 4, wins: 4 } as RoundRobinTeam;
+      const teamC = { goals: 0, wins: 0 } as RoundRobinTeam;
       const teams = [teamA, teamB, teamC];
 
       teams.sort(sut.customSort("goals"));
       expect(teams).toEqual([teamB, teamA, teamC]);
-
-      teamA.wins = 1;
-      teamB.wins = 4;
 
       teams.sort(sut.customSort("wins"));
       expect(teams).toEqual([teamB, teamA, teamC]);
