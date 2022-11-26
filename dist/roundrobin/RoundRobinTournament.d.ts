@@ -1,10 +1,9 @@
-import { Round, SortableAttribute, Tournament } from "../types";
+import { Tournament } from "../Tournament";
+import { Round, SortableAttribute } from "../types";
 import { ClassificationOptions, ClassificationProtocol, TieBreak } from "../types/interfaces";
 import { RoundRobinMatch } from "./RoundRobinMatch";
 import { RoundRobinTeam } from "./RoundRobinTeam";
-export declare class RoundRobinTournament implements Tournament {
-    readonly teams: RoundRobinTeam[];
-    readonly matches: RoundRobinMatch[];
+export declare class RoundRobinTournament extends Tournament<RoundRobinTeam, RoundRobinMatch> {
     readonly rounds: Round[];
     readonly classification: ClassificationProtocol;
     private readonly secondRound;

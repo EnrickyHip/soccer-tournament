@@ -4,7 +4,7 @@ exports.RoundRobinMatch = void 0;
 const Match_1 = require("../Match");
 class RoundRobinMatch extends Match_1.Match {
     constructor(homeTeam, awayTeam, id, tournament) {
-        super(homeTeam, awayTeam, id, tournament);
+        super(homeTeam, awayTeam, id);
         this.id = id;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;

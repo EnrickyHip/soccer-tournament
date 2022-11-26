@@ -17,7 +17,7 @@ class RoundRobinTeam extends Team_1.default {
         this.losses = 0;
         this.goals = 0;
         this.counterGoals = 0;
-        this._position = 0;
+        this.position = 0;
     }
     get points() {
         return this.wins * 3 + this.draws;
@@ -29,9 +29,6 @@ class RoundRobinTeam extends Team_1.default {
         if (this.points === 0)
             return 0;
         return (this.points * 100) / (this.matchesPlayed * 3);
-    }
-    get position() {
-        return this._position;
     }
     /**
      * Get the last played matches of the team.
@@ -68,16 +65,6 @@ class RoundRobinTeam extends Team_1.default {
         if (otherScore > selfScore)
             return types_1.Result.lose;
         return types_1.Result.draw;
-    }
-    /**
-     * Set the position of the team.
-     * @package
-     * @param position the position to set.
-     *
-     * We do not recommend to change the team position this way.
-     */
-    setPosition(position) {
-        this._position = position;
     }
     /**
      * This method is used internaly to calculate total wins, draws, losses, goals and counter goals.

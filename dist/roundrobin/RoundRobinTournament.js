@@ -5,13 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RoundRobinTournament = void 0;
 const roundrobin_tournament_js_1 = __importDefault(require("roundrobin-tournament-js"));
+const Tournament_1 = require("../Tournament");
 const Classification_1 = __importDefault(require("./Classification"));
 const RoundRobinMatch_1 = require("./RoundRobinMatch");
 const RoundRobinSort_1 = __importDefault(require("./RoundRobinSort"));
-class RoundRobinTournament {
+class RoundRobinTournament extends Tournament_1.Tournament {
     constructor(teams, secondRound, classification, tieBreaks) {
-        this.matches = [];
-        this.teams = teams;
+        super(teams);
         this.secondRound = secondRound;
         this.classification = new Classification_1.default(classification);
         this.sort = new RoundRobinSort_1.default(tieBreaks);
@@ -35,7 +35,7 @@ class RoundRobinTournament {
     sortTeams(attribute, reverse = false) {
         this.teams.sort(this.sort.positionSort());
         this.teams.forEach((team, index) => {
-            team.setPosition(index + 1);
+            team.position = index + 1;
         });
         if (attribute !== undefined || this.sort.currentAttribute !== "position") {
             this.teams.sort(this.sort.customSort(attribute, reverse));

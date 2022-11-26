@@ -1,6 +1,6 @@
 import type Team from "./Team";
 import { Goal } from "./types";
-import { Score, Tournament } from "./types/interfaces";
+import { Score } from "./types/interfaces";
 
 export abstract class Match {
   public readonly id: number;
@@ -8,13 +8,11 @@ export abstract class Match {
   public readonly awayTeam: Team;
   public isPlayed = false;
   public score: Score = { homeTeam: null, awayTeam: null };
-  protected readonly tournament?: Tournament;
 
-  constructor(homeTeam: Team, awayTeam: Team, id: number, tournament?: Tournament) {
+  constructor(homeTeam: Team, awayTeam: Team, id: number) {
     this.id = id;
     this.homeTeam = homeTeam;
     this.awayTeam = awayTeam;
-    this.tournament = tournament;
   }
 
   public abstract play(homeGoals: Goal, awayGoals: Goal): void;

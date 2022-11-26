@@ -15,7 +15,7 @@ export class RoundRobinMatch extends Match {
     id: number,
     tournament: RoundRobinTournament,
   ) {
-    super(homeTeam, awayTeam, id, tournament);
+    super(homeTeam, awayTeam, id);
     this.id = id;
     this.homeTeam = homeTeam;
     this.awayTeam = awayTeam;

@@ -2,13 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Match = void 0;
 class Match {
-    constructor(homeTeam, awayTeam, id, tournament) {
+    constructor(homeTeam, awayTeam, id) {
         this.isPlayed = false;
         this.score = { homeTeam: null, awayTeam: null };
         this.id = id;
         this.homeTeam = homeTeam;
         this.awayTeam = awayTeam;
-        this.tournament = tournament;
     }
     getTeamScore(team) {
         if (team !== this.homeTeam && team !== this.awayTeam) {

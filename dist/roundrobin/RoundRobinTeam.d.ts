@@ -10,11 +10,10 @@ export declare class RoundRobinTeam extends Team<RoundRobinMatch> {
     losses: number;
     goals: number;
     counterGoals: number;
-    private _position;
+    position: number;
     get points(): number;
     get goalDifference(): number;
     get percentage(): number;
-    get position(): number;
     /**
      * Get the last played matches of the team.
      * @param total - Number of matches you want to return. The default value is 5.
@@ -33,14 +32,6 @@ export declare class RoundRobinTeam extends Team<RoundRobinMatch> {
      * @returns The possible returns are the strings: "win", "draw" or "lose". If the match was not played yet, it returns `null`.
      */
     getResult(match: RoundRobinMatch): Result | null;
-    /**
-     * Set the position of the team.
-     * @package
-     * @param position the position to set.
-     *
-     * We do not recommend to change the team position this way.
-     */
-    setPosition(position: number): void;
     /**
      * This method is used internaly to calculate total wins, draws, losses, goals and counter goals.
      * @returns The team total points.

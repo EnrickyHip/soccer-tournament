@@ -1,6 +1,5 @@
 import { Match } from "../Match";
 import { RoundRobinTeam } from "../roundrobin";
-import Team from "../Team";
 import { Goal, SortableAttribute, TieBreakGetAttributes } from "./types";
 export interface MatchesObject<MatchType extends Match> {
     [id: number]: MatchType;
@@ -19,10 +18,6 @@ export interface Score {
 }
 export interface ClassificationOptions {
     [key: string]: MinMax;
-}
-export interface Tournament {
-    teams: Team[];
-    matches: Match[];
 }
 export interface ClassificationProtocol {
     get(): ClassificationOptions;
