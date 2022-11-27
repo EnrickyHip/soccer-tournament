@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Match } from "../lib/Match";
 import Team from "../lib/Team";
+import { Tournament } from "../lib/Tournament";
 import { Goal } from "../lib/types";
 
 class MatchMock extends Match {
@@ -9,7 +10,9 @@ class MatchMock extends Match {
   }
 }
 
-class TeamMock extends Team {}
+class TeamMock extends Team {
+  _tournament: Tournament | null = null;
+}
 
 const createTeams = () => {
   const team1 = new TeamMock("team1", "", 1);

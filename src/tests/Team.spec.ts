@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Match } from "../lib/Match";
 import Team from "../lib/Team";
-import { Goal } from "../lib/types";
+import { Tournament } from "../lib/Tournament";
 
+class tournamentMock extends Tournament {}
 class MatchMock extends Match {
   static create(homeTeam: Team, awayTeam: Team, id: number) {
     const match = new MatchMock(homeTeam, awayTeam, id);
@@ -18,7 +19,9 @@ class MatchMock extends Match {
 }
 
 describe("Team", () => {
-  class TeamMock extends Team {}
+  class TeamMock extends Team {
+    _tournament: Tournament | null = null;
+  }
 
   const createSut = (name: string, shield: string, id: number) => {
     const sut = new TeamMock(name, shield, id);
@@ -39,6 +42,31 @@ describe("Team", () => {
     it("should have id", () => {
       const { sut } = createSut("team", "", 1);
       expect(sut).toHaveProperty("id", 1);
+    });
+  });
+
+  describe("tournament", () => {
+    it("should throw error if team has already been in a tournament", () => {
+      const { sut } = createSut("team", "", 1);
+
+      const team2 = new TeamMock("team2", "shield", 2);
+      const tournament = new tournamentMock([sut, team2]);
+
+      expect(() => new tournamentMock([sut, team2])).toThrow("This match has already been on a Tournament!");
+      expect(() => (sut.tournament = tournament)).toThrow("This match has already been on a Tournament!");
+    });
+
+    it("should throw error if the team does not belongs to the sent tournament", () => {
+      const { sut } = createSut("team", "", 1);
+      const team2 = new TeamMock("team2", "shield", 2);
+      const tournament = new tournamentMock([team2]);
+
+      expect(() => (sut.tournament = tournament)).toThrow("This team does not belongs to the passed tournament!");
+    });
+
+    it("should throw error if the team has no tournament", () => {
+      const { sut } = createSut("team", "", 1);
+      expect(() => sut.tournament).toThrow("this team does not belongs to any tournament!");
     });
   });
 

@@ -50,12 +50,20 @@ describe("RoundRobinTeam", () => {
 
       expect(sut.percentage).toBeCloseTo(33.33);
     });
-  });
 
-  it("should set position", () => {
-    const sut = createSut();
-    sut.position = 10;
-    expect(sut.position).toBe(10);
+    it("should get teams position", () => {
+      const sut = createSut();
+      const team2 = new RoundRobinTeam("team2", "", 2);
+      const tournament = new RoundRobinTournament([sut, team2], true, {}, []);
+      const match = tournament.matches[0];
+      match.play(2, 0);
+
+      if (match.homeTeam === sut) {
+        expect(sut.position).toBe(1);
+      } else {
+        expect(sut.position).toBe(2);
+      }
+    });
   });
 
   describe("calculatePoints", () => {

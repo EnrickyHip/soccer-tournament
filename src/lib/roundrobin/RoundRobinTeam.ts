@@ -1,6 +1,7 @@
 import Team from "../Team";
 import { Result } from "../types";
 import { RoundRobinMatch } from "./RoundRobinMatch";
+import { RoundRobinTournament } from "./RoundRobinTournament";
 
 /**
  * Create a Team for a Round Robin Tournament.
@@ -12,7 +13,7 @@ export class RoundRobinTeam extends Team<RoundRobinMatch> {
   private _losses = 0;
   private _goals = 0;
   private _counterGoals = 0;
-  public position = 0;
+  protected _tournament: RoundRobinTournament | null = null;
 
   public get wins(): number {
     return this._wins;
@@ -45,6 +46,17 @@ export class RoundRobinTeam extends Team<RoundRobinMatch> {
   public get percentage(): number {
     if (this.points === 0) return 0;
     return (this.points * 100) / (this.matchesPlayed * 3);
+  }
+
+  public get position(): number {
+    if (!this._tournament) return 0;
+
+    const teams = this._tournament.teams;
+    for (let index = 0; index < teams.length; index++) {
+      if (teams[index].id === this.id) return index + 1;
+    }
+
+    return 0;
   }
 
   /**

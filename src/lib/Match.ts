@@ -34,6 +34,7 @@ export abstract class Match {
     this.afterPlay();
   }
 
+  //! esse método está funcionando corretamente?
   public getTeamScore(team: Team): [number, number] {
     if (team !== this.homeTeam && team !== this.awayTeam) {
       throw new Error("Team passed as an argument does not belongs to this match");
@@ -45,7 +46,6 @@ export abstract class Match {
     return [selfScore, otherScore];
   }
 
-  //* essa função está acessível em RoundRobinMatch também...
   public static getMatchesBetween<MatchType extends Match>(team1: Team<MatchType>, team2: Team<MatchType>) {
     return team1.matches.filter((match) => {
       const { homeTeam, awayTeam } = match;

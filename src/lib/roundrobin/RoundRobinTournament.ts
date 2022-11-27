@@ -46,9 +46,6 @@ export class RoundRobinTournament extends Tournament<RoundRobinTeam, RoundRobinM
 
   public sortTeams(attribute?: SortableAttribute, reverse = false): void {
     this.teams.sort(this.sort.positionSort());
-    this.teams.forEach((team, index) => {
-      team.position = index + 1;
-    });
 
     if (attribute !== undefined || this.sort.currentAttribute !== "position") {
       this.teams.sort(this.sort.customSort(attribute, reverse));
