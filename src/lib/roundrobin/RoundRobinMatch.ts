@@ -6,7 +6,7 @@ export class RoundRobinMatch extends Match {
   public readonly id: number;
   public readonly homeTeam: RoundRobinTeam;
   public readonly awayTeam: RoundRobinTeam;
-  protected readonly tournament: RoundRobinTournament;
+  protected readonly _tournament: RoundRobinTournament;
 
   private constructor(
     homeTeam: RoundRobinTeam,
@@ -18,13 +18,13 @@ export class RoundRobinMatch extends Match {
     this.id = id;
     this.homeTeam = homeTeam;
     this.awayTeam = awayTeam;
-    this.tournament = tournament;
+    this._tournament = tournament;
   }
 
-  protected afterPlay() {
+  protected afterPlay(): void {
     this.homeTeam.calculatePoints();
     this.awayTeam.calculatePoints();
-    this.tournament.sortTeams();
+    this._tournament.sortTeams();
   }
 
   public static create(

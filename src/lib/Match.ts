@@ -6,8 +6,8 @@ export abstract class Match {
   public readonly id: number;
   public readonly homeTeam: Team;
   public readonly awayTeam: Team;
+  protected readonly _score: Score = { homeTeam: null, awayTeam: null };
   protected _isPlayed = false;
-  public readonly score: Score = { homeTeam: null, awayTeam: null };
 
   constructor(homeTeam: Team, awayTeam: Team, id: number) {
     this.id = id;
@@ -19,11 +19,15 @@ export abstract class Match {
     return this._isPlayed;
   }
 
+  public get score(): Score {
+    return { ...this._score };
+  }
+
   protected abstract afterPlay(): void;
 
   public play(homeGoals: Goal, awayGoals: Goal): void {
-    this.score.homeTeam = homeGoals;
-    this.score.awayTeam = awayGoals;
+    this._score.homeTeam = homeGoals;
+    this._score.awayTeam = awayGoals;
 
     if (homeGoals === null || awayGoals === null) {
       this._isPlayed = false;
@@ -40,13 +44,16 @@ export abstract class Match {
       throw new Error("Team passed as an argument does not belongs to this match");
     }
 
-    const { homeTeam: homeTeamGoals, awayTeam: awayTeamGoals } = this.score;
+    const { homeTeam: homeTeamGoals, awayTeam: awayTeamGoals } = this._score;
     const selfScore = this.homeTeam === team ? (homeTeamGoals as number) : (awayTeamGoals as number);
     const otherScore = this.homeTeam === team ? (awayTeamGoals as number) : (homeTeamGoals as number);
     return [selfScore, otherScore];
   }
 
-  public static getMatchesBetween<MatchType extends Match>(team1: Team<MatchType>, team2: Team<MatchType>) {
+  public static getMatchesBetween<MatchType extends Match>(
+    team1: Team<MatchType>,
+    team2: Team<MatchType>,
+  ): MatchType[] {
     return team1.matches.filter((match) => {
       const { homeTeam, awayTeam } = match;
       return (homeTeam === team1 && awayTeam === team2) || (homeTeam === team2 && awayTeam === team1);

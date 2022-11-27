@@ -53,7 +53,7 @@ describe("RoundRobinTournament", () => {
   describe("sortTeams", () => {
     it("should call positionSort", () => {
       const { sut } = createSut(false);
-      const spy = jest.spyOn(sut["sort"], "positionSort");
+      const spy = jest.spyOn(sut["_sort"], "positionSort");
       sut.sortTeams();
 
       expect(spy).toBeCalledTimes(1);
@@ -61,7 +61,7 @@ describe("RoundRobinTournament", () => {
 
     it("should call customSort if some attribute is sent", () => {
       const { sut } = createSut(false);
-      const spy = jest.spyOn(sut["sort"], "customSort");
+      const spy = jest.spyOn(sut["_sort"], "customSort");
 
       sut.sortTeams();
       expect(spy).toBeCalledTimes(0);
@@ -72,9 +72,9 @@ describe("RoundRobinTournament", () => {
 
     it("should call customSort if sortAttribute of sut.sort is not 'position' and no attribute is sent", () => {
       const { sut } = createSut(false);
-      const spy = jest.spyOn(sut["sort"], "customSort");
+      const spy = jest.spyOn(sut["_sort"], "customSort");
 
-      sut["sort"].currentAttribute = "goals";
+      sut["_sort"].currentAttribute = "goals";
       sut.sortTeams();
       expect(spy).toBeCalledTimes(1);
     });

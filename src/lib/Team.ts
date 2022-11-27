@@ -6,7 +6,7 @@ abstract class Team<MatchType extends Match = Match> {
   public readonly id: number;
   public readonly name: string;
   public readonly shield: string;
-  protected readonly matchesObject: MatchesObject<MatchType> = {};
+  protected readonly _matchesObject: MatchesObject<MatchType> = {};
   protected abstract _tournament: Tournament | null;
 
   constructor(name: string, shield: string, id: number) {
@@ -27,11 +27,11 @@ abstract class Team<MatchType extends Match = Match> {
   }
 
   public get matches(): MatchType[] {
-    return Object.values(this.matchesObject);
+    return Object.values(this._matchesObject);
   }
 
   public get matchesPlayedArray(): MatchType[] {
-    return Object.values(this.matchesObject).filter((match: MatchType) => match.isPlayed);
+    return Object.values(this._matchesObject).filter((match: MatchType) => match.isPlayed);
   }
 
   public get matchesPlayed(): number {
@@ -49,9 +49,9 @@ abstract class Team<MatchType extends Match = Match> {
   }
 
   //* esse método não é recomendado o uso na lib
-  public addMatch(match: MatchType) {
-    if (this.matchesObject[match.id]) throw new Error("Match id already exists!");
-    else this.matchesObject[match.id] = match;
+  public addMatch(match: MatchType): void {
+    if (this._matchesObject[match.id]) throw new Error("Match id already exists!");
+    else this._matchesObject[match.id] = match;
   }
 
   protected isInTournament(tournament: Tournament): boolean {

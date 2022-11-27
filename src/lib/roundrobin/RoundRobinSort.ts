@@ -28,7 +28,7 @@ export default class RoundRobinSort implements SortProtocol {
   };
 
   public positionSort = () => {
-    return (team1: RoundRobinTeam, team2: RoundRobinTeam) => {
+    return (team1: RoundRobinTeam, team2: RoundRobinTeam): number => {
       if (team1.points < team2.points) return 1; // 1 changes the position
       if (team1.points > team2.points) return -1; // -1 still the same
 
