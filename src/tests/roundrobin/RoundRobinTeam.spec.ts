@@ -6,7 +6,7 @@ describe("RoundRobinTeam", () => {
   const createSut = () => new RoundRobinTeamMock("team", "", 1);
 
   const createMatch = (sut: RoundRobinTeamMock, id: number) => {
-    const tournamentMock = new RoundRobinTournament([], false, {}, []);
+    const tournamentMock = new RoundRobinTournament([]);
     const team2 = new RoundRobinTeamMock("team2", "", 2);
     const match = RoundRobinMatch.create(sut, team2, id, tournamentMock);
     return { match, team2 };
@@ -54,7 +54,7 @@ describe("RoundRobinTeam", () => {
     it("should get teams position", () => {
       const sut = createSut();
       const team2 = new RoundRobinTeam("team2", "", 2);
-      const tournament = new RoundRobinTournament([sut, team2], true, {}, []);
+      const tournament = new RoundRobinTournament([sut, team2], true);
       const match = tournament.matches[0];
       match.play(2, 0);
 
@@ -290,7 +290,7 @@ describe("RoundRobinTeam", () => {
       const sut = createSut();
       const team2 = new RoundRobinTeamMock("team2", "", 2);
       const team3 = new RoundRobinTeamMock("team3", "", 3);
-      const tournamentMock = new RoundRobinTournament([], false, {}, []);
+      const tournamentMock = new RoundRobinTournament([]);
       const match = RoundRobinMatch.create(team2, team3, 1, tournamentMock);
 
       expect(() => sut.getResult(match)).toThrow("This team does not belongs to the sent match.");

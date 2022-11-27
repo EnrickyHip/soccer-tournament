@@ -1,7 +1,7 @@
 import { RoundRobinMatch, RoundRobinTeam, RoundRobinTournament } from "../../lib/roundrobin";
 
 const createSut = () => {
-  const tournamentMock = new RoundRobinTournament([], false, {}, []);
+  const tournamentMock = new RoundRobinTournament([]);
   const team1 = new RoundRobinTeam("team1", "", 1);
   const team2 = new RoundRobinTeam("team2", "", 2);
   const sut = RoundRobinMatch.create(team1, team2, 1, tournamentMock);

@@ -35,7 +35,7 @@ describe("HeadToHeadAwayGoalsTieBreak", () => {
     it("should get teams head-to-head away goals", () => {
       const { sut, team1, team2 } = createSut();
       const team3 = new RoundRobinTeam("team3", "", 3);
-      const tournamentMock = new RoundRobinTournament([], false, {}, []);
+      const tournamentMock = new RoundRobinTournament([]);
 
       const match1 = RoundRobinMatch.create(team1, team2, 1, tournamentMock);
       const match2 = RoundRobinMatch.create(team2, team1, 2, tournamentMock);
@@ -56,7 +56,7 @@ describe("HeadToHeadAwayGoalsTieBreak", () => {
 
     it("should not count if the match is not played", () => {
       const { sut, team1, team2 } = createSut();
-      const tournamentMock = new RoundRobinTournament([], false, {}, []);
+      const tournamentMock = new RoundRobinTournament([]);
       RoundRobinMatch.create(team1, team2, 1, tournamentMock);
       RoundRobinMatch.create(team2, team1, 2, tournamentMock);
 

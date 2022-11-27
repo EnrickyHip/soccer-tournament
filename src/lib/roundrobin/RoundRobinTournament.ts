@@ -16,9 +16,9 @@ export class RoundRobinTournament extends Tournament<RoundRobinTeam, RoundRobinM
 
   constructor(
     teams: RoundRobinTeam[],
-    secondRound: boolean,
-    classification: ClassificationOptions,
-    tieBreaks: TieBreak[],
+    secondRound = false,
+    classification: ClassificationOptions = {},
+    tieBreaks: TieBreak[] = [],
   ) {
     super(teams);
     this.secondRound = secondRound;
