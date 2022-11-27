@@ -1,14 +1,14 @@
 import { SortableAttribute } from "../../types";
-import { TieBreak } from "../../types/interfaces";
 import { TieBreakGetAttributes } from "../../types/types";
+import { TieBreak } from "./TieBreak";
 
-export class AttributeTieBreak implements TieBreak {
+export class AttributeTieBreak extends TieBreak {
   private attribute: SortableAttribute;
-  public reverse: boolean;
 
   constructor(attribute: SortableAttribute, reverse = false) {
+    super();
     this.attribute = attribute;
-    this.reverse = reverse;
+    this._reverse = reverse;
   }
 
   public getAttributes: TieBreakGetAttributes = (team1, team2) => {

@@ -1,6 +1,6 @@
 import { CustomTieBreak, RoundRobinTeam, tieBreaks } from "../../lib/roundrobin";
 import RoundRobinSort from "../../lib/roundrobin/RoundRobinSort";
-import { TieBreak } from "../../lib/types/interfaces";
+import { TieBreak } from "../../lib/roundrobin/tieBreaks/TieBreak";
 
 describe("RoundRobinSort", () => {
   const createSut = (tiebreaks: TieBreak[]) => {

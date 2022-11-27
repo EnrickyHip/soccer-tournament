@@ -1,12 +1,13 @@
 import roundrobin, { type Rounds } from "roundrobin-tournament-js";
 import { Tournament } from "../Tournament";
 import { Round, SortableAttribute } from "../types";
-import { ClassificationOptions, ClassificationProtocol, SortProtocol, TieBreak } from "../types/interfaces";
+import { ClassificationOptions, ClassificationProtocol, SortProtocol } from "../types/interfaces";
 
 import Classification from "./Classification";
 import { RoundRobinMatch } from "./RoundRobinMatch";
 import RoundRobinSort from "./RoundRobinSort";
 import { RoundRobinTeam } from "./RoundRobinTeam";
+import { TieBreak } from "./tieBreaks/TieBreak";
 
 export class RoundRobinTournament extends Tournament<RoundRobinTeam, RoundRobinMatch> {
   public readonly rounds: Round[];

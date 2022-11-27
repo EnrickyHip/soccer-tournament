@@ -1,10 +1,8 @@
-import { TieBreak } from "../../types/interfaces";
 import { TieBreakGetAttributes } from "../../types/types";
+import { TieBreak } from "./TieBreak";
 
-export class CustomTieBreak implements TieBreak {
+export class CustomTieBreak extends TieBreak {
   public getAttributes: TieBreakGetAttributes;
-  public reverse: boolean;
-
   /**
    * Create a custom tie break.
    *
@@ -62,7 +60,8 @@ export class CustomTieBreak implements TieBreak {
    */
 
   constructor(getAttributes: TieBreakGetAttributes, reverse = false) {
+    super();
     this.getAttributes = getAttributes;
-    this.reverse = reverse;
+    this._reverse = reverse;
   }
 }

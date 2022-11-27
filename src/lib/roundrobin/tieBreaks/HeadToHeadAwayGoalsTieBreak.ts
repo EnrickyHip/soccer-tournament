@@ -1,9 +1,8 @@
 import { Match } from "../../Match";
-import { TieBreak } from "../../types/interfaces";
 import { TieBreakGetAttributes } from "../../types/types";
+import { TieBreak } from "./TieBreak";
 
-export class HeadToHeadAwayGoalsTieBreak implements TieBreak {
-  public reverse = false;
+export class HeadToHeadAwayGoalsTieBreak extends TieBreak {
   public getAttributes: TieBreakGetAttributes = (team1, team2) => {
     const headToHead = Match.getMatchesBetween(team1, team2);
 

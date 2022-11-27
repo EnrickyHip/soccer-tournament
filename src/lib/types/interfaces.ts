@@ -1,14 +1,9 @@
 import { Match } from "../Match";
 import { RoundRobinTeam } from "../roundrobin";
-import { Goal, SortableAttribute, TieBreakGetAttributes } from "./types";
+import { Goal, SortableAttribute } from "./types";
 
 export interface MatchesObject<MatchType extends Match> {
   [id: number]: MatchType;
-}
-
-export interface TieBreak {
-  getAttributes: TieBreakGetAttributes;
-  reverse: boolean;
 }
 
 export interface MinMax {
