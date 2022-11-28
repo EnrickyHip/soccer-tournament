@@ -74,9 +74,9 @@ describe("RoundRobinTournament", () => {
       const { sut } = createSut(false);
       const spy = jest.spyOn(sut["_sort"], "customSort");
 
-      sut["_sort"].currentAttribute = "goals";
+      sut["_sort"].customSort("goals");
       sut.sortTeams();
-      expect(spy).toBeCalledTimes(1);
+      expect(spy).toBeCalledTimes(2);
     });
   });
 });
