@@ -6,8 +6,8 @@ abstract class Team<MatchType extends Match = Match> {
   public readonly id: number;
   public readonly name: string;
   public readonly shield: string;
-  protected readonly _matchesObject: MatchesObject<MatchType> = {};
   protected abstract _tournament: Tournament | null;
+  private readonly _matchesObject: MatchesObject<MatchType> = {};
 
   constructor(name: string, shield: string, id: number) {
     this.name = name;

@@ -6,8 +6,8 @@ export abstract class Match {
   public readonly id: number;
   public readonly homeTeam: Team;
   public readonly awayTeam: Team;
-  protected readonly _score: Score = { homeTeam: null, awayTeam: null };
-  protected _isPlayed = false;
+  private readonly _score: Score = { homeTeam: null, awayTeam: null };
+  private _isPlayed = false;
 
   constructor(homeTeam: Team, awayTeam: Team, id: number) {
     this.id = id;

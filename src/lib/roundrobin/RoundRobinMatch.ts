@@ -27,6 +27,7 @@ export class RoundRobinMatch extends Match {
     this._tournament.sortTeams();
   }
 
+  //!esse método pode ser abstrato na clase Match né...
   public static create(
     homeTeam: RoundRobinTeam,
     awayTeam: RoundRobinTeam,
