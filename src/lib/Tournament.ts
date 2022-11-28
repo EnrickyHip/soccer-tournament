@@ -1,13 +1,22 @@
 import { Match } from "./Match";
 import Team from "./Team";
 
-//!fazer validação dos times para identifica o id de cada um OU criar o id dos times dentro do Tournament
 export abstract class Tournament<TeamType extends Team = Team, MatchType extends Match = Match> {
   public readonly teams: TeamType[];
   public readonly matches: MatchType[] = [];
 
   constructor(teams: TeamType[]) {
     this.teams = teams;
+    this.checkIds();
     this.teams.forEach((team) => (team.tournament = this));
+  }
+
+  private checkIds(): void {
+    for (const team of this.teams) {
+      for (const team2 of this.teams) {
+        if (team === team2) continue;
+        if (team.id === team2.id) throw new Error("Some teams contain the same id!");
+      }
+    }
   }
 }
