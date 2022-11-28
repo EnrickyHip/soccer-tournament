@@ -1,4 +1,5 @@
 import { Match } from "./Match";
+import { SoccerTournamentError } from "./SoccerTournamentError";
 import Team from "./Team";
 
 export abstract class Tournament<TeamType extends Team = Team, MatchType extends Match = Match> {
@@ -15,7 +16,7 @@ export abstract class Tournament<TeamType extends Team = Team, MatchType extends
     for (const team of this.teams) {
       for (const team2 of this.teams) {
         if (team === team2) continue;
-        if (team.id === team2.id) throw new Error("Some teams contain the same id!");
+        if (team.id === team2.id) throw new SoccerTournamentError("Some teams contain the same id!");
       }
     }
   }

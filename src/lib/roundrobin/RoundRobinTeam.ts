@@ -1,3 +1,4 @@
+import { SoccerTournamentError } from "../SoccerTournamentError";
 import Team from "../Team";
 import { Result } from "../types";
 import { RoundRobinMatch } from "./RoundRobinMatch";
@@ -89,7 +90,7 @@ export class RoundRobinTeam extends Team<RoundRobinMatch> {
 
   public getResult(match: RoundRobinMatch): Result | null {
     if (match.homeTeam !== this && match.awayTeam !== this) {
-      throw new Error("This team does not belongs to the sent match.");
+      throw new SoccerTournamentError("This team does not belongs to the sent match.");
     }
 
     if (!match.isPlayed) return null;

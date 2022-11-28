@@ -1,4 +1,5 @@
 import { Match } from "./Match";
+import { SoccerTournamentError } from "./SoccerTournamentError";
 import { Tournament } from "./Tournament";
 import { MatchesObject } from "./types/interfaces";
 
@@ -16,13 +17,15 @@ abstract class Team<MatchType extends Match = Match> {
   }
 
   public set tournament(tournament: Tournament) {
-    if (this._tournament) throw new Error("This match has already been on a Tournament!");
-    if (!this.isInTournament(tournament)) throw new Error("This team does not belongs to the passed tournament!");
+    if (this._tournament) throw new SoccerTournamentError("This match has already been on a Tournament!");
+    if (!this.isInTournament(tournament)) {
+      throw new SoccerTournamentError("This team does not belongs to the passed tournament!");
+    }
     this._tournament = tournament;
   }
 
   public get tournament(): Tournament {
-    if (!this._tournament) throw new Error("this team does not belongs to any tournament!");
+    if (!this._tournament) throw new SoccerTournamentError("this team does not belongs to any tournament!");
     return this._tournament;
   }
 
@@ -41,7 +44,7 @@ abstract class Team<MatchType extends Match = Match> {
   public goalsInMatches(matches: MatchType[]): number {
     return matches.reduce((goals: number, match) => {
       if (match.homeTeam !== this && match.awayTeam !== this) {
-        throw new Error("This team doest not belong to some match which was passed as an argument");
+        throw new SoccerTournamentError("This team doest not belong to some match which was passed as an argument");
       }
       const [selfScore] = match.getTeamScore(this);
       return goals + selfScore;
@@ -50,7 +53,7 @@ abstract class Team<MatchType extends Match = Match> {
 
   //* esse método não é recomendado o uso na lib
   public addMatch(match: MatchType): void {
-    if (this._matchesObject[match.id]) throw new Error("Match id already exists!");
+    if (this._matchesObject[match.id]) throw new SoccerTournamentError("Match id already exists!");
     else this._matchesObject[match.id] = match;
   }
 

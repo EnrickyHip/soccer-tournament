@@ -1,3 +1,4 @@
+import { SoccerTournamentError } from "./SoccerTournamentError";
 import type Team from "./Team";
 import { Goal } from "./types";
 import { Score } from "./types/interfaces";
@@ -41,7 +42,7 @@ export abstract class Match {
   //! esse método está funcionando corretamente?
   public getTeamScore(team: Team): [number, number] {
     if (team !== this.homeTeam && team !== this.awayTeam) {
-      throw new Error("Team passed as an argument does not belongs to this match");
+      throw new SoccerTournamentError("Team passed as an argument does not belongs to this match");
     }
 
     const { homeTeam: homeTeamGoals, awayTeam: awayTeamGoals } = this._score;
