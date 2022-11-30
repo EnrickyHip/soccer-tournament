@@ -4,16 +4,18 @@ import { Tournament } from "./Tournament";
 import { MatchesObject } from "./types/interfaces";
 
 abstract class Team<MatchType extends Match = Match> {
+  private static _idCounter = 1;
+
   public readonly id: number;
   public readonly name: string;
   public readonly shield: string;
   protected abstract _tournament: Tournament | null;
   private readonly _matchesObject: MatchesObject<MatchType> = {};
 
-  constructor(name: string, shield: string, id: number) {
+  constructor(name: string, shield: string) {
     this.name = name;
     this.shield = shield;
-    this.id = id;
+    this.id = Team._idCounter++;
   }
 
   public set tournament(tournament: Tournament) {

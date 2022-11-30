@@ -4,8 +4,8 @@ import { HeadToHeadTieBreak } from "../../../lib/roundrobin/tieBreaks/HeadToHead
 
 describe("HeadToHeadTieBreak", () => {
   const createSut = () => {
-    const team1 = new RoundRobinTeam("team1", "", 1);
-    const team2 = new RoundRobinTeam("team2", "", 2);
+    const team1 = new RoundRobinTeam("team1", "");
+    const team2 = new RoundRobinTeam("team2", "");
     const sut = new HeadToHeadTieBreak();
     return { sut, team1, team2 };
   };

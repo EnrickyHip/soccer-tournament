@@ -2,7 +2,6 @@
 import { Match } from "../lib/Match";
 import Team from "../lib/Team";
 import { Tournament } from "../lib/Tournament";
-import { Goal } from "../lib/types";
 
 class MatchMock extends Match {
   protected afterPlay(): void {
@@ -15,8 +14,8 @@ class TeamMock extends Team {
 }
 
 const createTeams = () => {
-  const team1 = new TeamMock("team1", "", 1);
-  const team2 = new TeamMock("team2", "", 2);
+  const team1 = new TeamMock("team1", "");
+  const team2 = new TeamMock("team2", "");
   return { team1, team2 };
 };
 
@@ -60,7 +59,7 @@ describe("Match", () => {
   describe("getTeamScore", () => {
     it("should throw error the team sent does not belongs to the match", () => {
       const { match1 } = createMatches();
-      const team = new TeamMock("team", "", 9999);
+      const team = new TeamMock("team", "");
 
       expect(() => match1.getTeamScore(team)).toThrow("Team passed as an argument does not belongs to this match");
     });
@@ -78,7 +77,7 @@ describe("Match", () => {
     it("should get matches between", () => {
       const { team1, team2, match1, match2 } = createMatches();
 
-      const team3 = new TeamMock("team3", "", 3);
+      const team3 = new TeamMock("team3", "");
       const match3 = new MatchMock(team1, team3, 3);
       team1.addMatch(match3);
       team3.addMatch(match3);
@@ -96,8 +95,8 @@ describe("Match", () => {
     });
 
     it("should return a empty array if teams have no matches in common", () => {
-      const team1 = new TeamMock("team1", "", 1);
-      const team2 = new TeamMock("team3", "", 2);
+      const team1 = new TeamMock("team1", "");
+      const team2 = new TeamMock("team3", "");
       const matches = Match.getMatchesBetween(team1, team2);
 
       expect(matches).toHaveLength(0);
@@ -124,8 +123,8 @@ describe("Match", () => {
     });
 
     it("should call goalsInMatches for both teams", () => {
-      const team1 = new TeamMock("team1", "", 1);
-      const team2 = new TeamMock("team2", "", 2);
+      const team1 = new TeamMock("team1", "");
+      const team2 = new TeamMock("team2", "");
 
       const spy1 = jest.spyOn(team1, "goalsInMatches");
       const spy2 = jest.spyOn(team2, "goalsInMatches");
@@ -137,8 +136,8 @@ describe("Match", () => {
     });
 
     it("should return 0 for both if teams have no matches in common", () => {
-      const team1 = new TeamMock("team1", "", 1);
-      const team2 = new TeamMock("team2", "", 2);
+      const team1 = new TeamMock("team1", "");
+      const team2 = new TeamMock("team2", "");
 
       const goals = Match.headToHeadGoals(team1, team2);
       expect(goals).toEqual([0, 0]);

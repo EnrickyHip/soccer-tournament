@@ -4,8 +4,8 @@ import { HeadToHeadAwayGoalsTieBreak } from "../../../lib/roundrobin/tieBreaks/H
 
 describe("HeadToHeadAwayGoalsTieBreak", () => {
   const createSut = () => {
-    const team1 = new RoundRobinTeam("team1", "", 1);
-    const team2 = new RoundRobinTeam("team2", "", 2);
+    const team1 = new RoundRobinTeam("team1", "");
+    const team2 = new RoundRobinTeam("team2", "");
     const sut = new HeadToHeadAwayGoalsTieBreak();
     return { sut, team1, team2 };
   };
@@ -34,7 +34,7 @@ describe("HeadToHeadAwayGoalsTieBreak", () => {
 
     it("should get teams head-to-head away goals", () => {
       const { sut, team1, team2 } = createSut();
-      const team3 = new RoundRobinTeam("team3", "", 3);
+      const team3 = new RoundRobinTeam("team3", "");
       const tournamentMock = new RoundRobinTournament([]);
 
       const match1 = RoundRobinMatch.create(team1, team2, 1, tournamentMock);

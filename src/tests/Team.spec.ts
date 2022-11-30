@@ -23,33 +23,37 @@ describe("Team", () => {
     _tournament: Tournament | null = null;
   }
 
-  const createSut = (name: string, shield: string, id: number) => {
-    const sut = new TeamMock(name, shield, id);
+  const createSut = (name: string, shield: string) => {
+    const sut = new TeamMock(name, shield);
     return { sut };
   };
 
   describe("properties", () => {
+    it("should auto increment id", () => {
+      const { sut } = createSut("team", "");
+      const { sut: sut2 } = createSut("team", "");
+      const { sut: sut3 } = createSut("team", "");
+      expect(sut).toHaveProperty("id", 1);
+      expect(sut2).toHaveProperty("id", 2);
+      expect(sut3).toHaveProperty("id", 3);
+    });
+
     it("should have name", () => {
-      const { sut } = createSut("Team Name", "", 1);
+      const { sut } = createSut("Team Name", "");
       expect(sut).toHaveProperty("name", "Team Name");
     });
 
     it("should have shield", () => {
-      const { sut } = createSut("team", "path/to/image", 1);
+      const { sut } = createSut("team", "path/to/image");
       expect(sut).toHaveProperty("shield", "path/to/image");
-    });
-
-    it("should have id", () => {
-      const { sut } = createSut("team", "", 1);
-      expect(sut).toHaveProperty("id", 1);
     });
   });
 
   describe("tournament", () => {
     it("should throw error if team has already been in a tournament", () => {
-      const { sut } = createSut("team", "", 1);
+      const { sut } = createSut("team", "");
 
-      const team2 = new TeamMock("team2", "shield", 2);
+      const team2 = new TeamMock("team2", "shield");
       const tournament = new tournamentMock([sut, team2]);
 
       expect(() => new tournamentMock([sut, team2])).toThrow("This match has already been on a Tournament!");
@@ -57,23 +61,23 @@ describe("Team", () => {
     });
 
     it("should throw error if the team does not belongs to the sent tournament", () => {
-      const { sut } = createSut("team", "", 1);
-      const team2 = new TeamMock("team2", "shield", 2);
+      const { sut } = createSut("team", "");
+      const team2 = new TeamMock("team2", "shield");
       const tournament = new tournamentMock([team2]);
 
       expect(() => (sut.tournament = tournament)).toThrow("This team does not belongs to the passed tournament!");
     });
 
     it("should throw error if the team has no tournament", () => {
-      const { sut } = createSut("team", "", 1);
+      const { sut } = createSut("team", "");
       expect(() => sut.tournament).toThrow("this team does not belongs to any tournament!");
     });
   });
 
   describe("matches", () => {
     it("should return all matches of the team (played or not)", () => {
-      const { sut } = createSut("team", "", 1);
-      const team2 = new TeamMock("team2", "shield", 2);
+      const { sut } = createSut("team", "");
+      const team2 = new TeamMock("team2", "shield");
 
       const match1 = MatchMock.create(sut, team2, 1);
       const match2 = MatchMock.create(sut, team2, 2);
@@ -85,15 +89,15 @@ describe("Team", () => {
     });
 
     it("should return an empty array with team has no matches", () => {
-      const { sut } = createSut("team", "", 1);
+      const { sut } = createSut("team", "");
       expect(sut.matches).toHaveLength(0);
     });
   });
 
   describe("matchesPlayedArray", () => {
     it("should return all matches played of the team", () => {
-      const { sut } = createSut("team", "", 1);
-      const team2 = new TeamMock("team2", "shield", 2);
+      const { sut } = createSut("team", "");
+      const team2 = new TeamMock("team2", "shield");
 
       MatchMock.create(sut, team2, 1);
       const match2 = MatchMock.create(sut, team2, 2);
@@ -105,8 +109,8 @@ describe("Team", () => {
     });
 
     it("should return an empty array with team has no matches played", () => {
-      const { sut } = createSut("team", "", 1);
-      const team2 = new TeamMock("team2", "shield", 2);
+      const { sut } = createSut("team", "");
+      const team2 = new TeamMock("team2", "shield");
 
       MatchMock.create(sut, team2, 1);
       MatchMock.create(sut, team2, 2);
@@ -117,8 +121,8 @@ describe("Team", () => {
 
   describe("matchesPlayed", () => {
     it("should return the number of matches played", () => {
-      const { sut } = createSut("team", "", 1);
-      const team2 = new TeamMock("team2", "shield", 2);
+      const { sut } = createSut("team", "");
+      const team2 = new TeamMock("team2", "shield");
 
       const match1 = MatchMock.create(sut, team2, 1);
       const match2 = MatchMock.create(sut, team2, 2);
@@ -133,9 +137,9 @@ describe("Team", () => {
 
   describe("goalsInMatches", () => {
     it("should throw error if team does not belongs to some match", () => {
-      const { sut } = createSut("team", "", 1);
-      const team2 = new TeamMock("team2", "shield", 2);
-      const team3 = new TeamMock("team3", "shield", 3);
+      const { sut } = createSut("team", "");
+      const team2 = new TeamMock("team2", "shield");
+      const team3 = new TeamMock("team3", "shield");
 
       const match1 = MatchMock.create(sut, team2, 1);
       const match2 = MatchMock.create(team2, team3, 2);
@@ -147,9 +151,9 @@ describe("Team", () => {
     });
 
     it("should return the number of goals of the team in the matches sent", () => {
-      const { sut } = createSut("team", "", 1);
-      const team2 = new TeamMock("team2", "shield", 2);
-      const team3 = new TeamMock("team3", "shield", 3);
+      const { sut } = createSut("team", "");
+      const team2 = new TeamMock("team2", "shield");
+      const team3 = new TeamMock("team3", "shield");
 
       const match1 = MatchMock.create(sut, team2, 1);
       const match2 = MatchMock.create(sut, team3, 2);
@@ -173,8 +177,8 @@ describe("Team", () => {
 
   describe("addMatch", () => {
     it("should add match", () => {
-      const { sut } = createSut("team", "", 1);
-      const team2 = new TeamMock("team2", "shield", 2);
+      const { sut } = createSut("team", "");
+      const team2 = new TeamMock("team2", "shield");
 
       const match = new MatchMock(sut, team2, 1);
       sut.addMatch(match);
@@ -184,8 +188,8 @@ describe("Team", () => {
     });
 
     it("should throw error if match has already been added", () => {
-      const { sut } = createSut("team", "", 1);
-      const team2 = new TeamMock("team2", "shield", 2);
+      const { sut } = createSut("team", "");
+      const team2 = new TeamMock("team2", "shield");
       const match = new MatchMock(sut, team2, 1);
       sut.addMatch(match);
 

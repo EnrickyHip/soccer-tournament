@@ -7,8 +7,8 @@ class TeamMock extends Team {
 }
 
 const createSut = () => {
-  const team = new TeamMock("team", "shield", 1);
-  const team2 = new TeamMock("team2", "shield2", 2);
+  const team = new TeamMock("team", "shield");
+  const team2 = new TeamMock("team2", "shield2");
   const sut = new TournamentMock([team, team2]);
   return { sut, team, team2 };
 };
